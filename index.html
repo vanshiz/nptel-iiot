@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IIoT & Industry 4.0 — Quiz Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0e0e10;
+  --bg2: #141416;
+  --bg3: #1a1a1e;
+  --card: #1e1e24;
+  --card2: #252530;
+  --border: #2e2e3a;
+  --border2: #3a3a4a;
+
+  --text: #f0f0f5;
+  --text2: #a0a0b8;
+  --muted: #606075;
+
+  --amber: #f5a623;
+  --amber-dim: rgba(245,166,35,0.12);
+  --amber-glow: rgba(245,166,35,0.25);
+
+  --teal: #00d4aa;
+  --teal-dim: rgba(0,212,170,0.1);
+
+  --rose: #ff4f6d;
+  --rose-dim: rgba(255,79,109,0.1);
+
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.1);
+  --yellow: #f59e0b;
+
+  --mono: 'JetBrains Mono', monospace;
+  --display: 'Syne', sans-serif;
+  --sans: 'Outfit', sans-serif;
+  --radius: 14px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Grid texture */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
+  background-size:50px 50px;
+  pointer-events:none;
+  z-index:0;
+}
+
+#app{position:relative;z-index:1}
+
+/* ── SCREENS ── */
+.screen{display:none}
+.screen.active{display:block}
+
+/* ── TOP NAV ── */
+.top-nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 28px;
+  border-bottom:1px solid var(--border);
+  background: rgba(14,14,16,0.8);
+  backdrop-filter: blur(20px);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family: var(--display);
+  font-weight:700;
+  font-size:15px;
+  color:var(--text);
+}
+.nav-dot {
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--amber);
+  box-shadow:0 0 8px var(--amber);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(0.8)}}
+
+.nav-links{display:flex;gap:6px}
+.nav-link {
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:7px 14px;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:500;
+  color:var(--text2);
+  cursor:pointer;
+  transition:all .2s;
+}
+.nav-link:hover,.nav-link.active-tab{
+  border-color:var(--amber);
+  color:var(--amber);
+  background:var(--amber-dim);
+}
+
+/* ── HOME ── */
+#home-screen {
+  max-width:900px;
+  margin:0 auto;
+  padding:48px 24px;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:40px;
+}
+#home-screen.active{display:flex}
+
+.hero-eyebrow {
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--amber);
+  background:var(--amber-dim);
+  border:1px solid rgba(245,166,35,0.2);
+  padding:6px 16px;
+  border-radius:100px;
+}
+
+h1 {
+  font-family:var(--display);
+  font-size:clamp(32px,6vw,56px);
+  font-weight:800;
+  text-align:center;
+  line-height:1.1;
+  color:var(--text);
+  letter-spacing:-.02em;
+}
+h1 span {color:var(--amber)}
+
+.subtitle {
+  color:var(--text2);
+  text-align:center;
+  max-width:480px;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.stats-row {
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.stat-chip {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px 28px;
+  text-align:center;
+  min-width:120px;
+  transition:border-color .2s;
+}
+.stat-chip:hover{border-color:var(--border2)}
+.stat-chip .num {
+  font-family:var(--display);
+  font-size:30px;
+  font-weight:800;
+  color:var(--amber);
+}
+.stat-chip .lbl {
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+  font-family:var(--mono);
+  letter-spacing:.05em;
+}
+
+.action-row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.btn {
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:14px;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  padding:13px 28px;
+  transition:all .2s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+.btn-primary {
+  background:var(--amber);
+  color:#0e0e10;
+  box-shadow:0 4px 20px var(--amber-glow);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--amber-glow)}
+.btn-secondary {
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
+.btn-teal {
+  background:var(--teal-dim);
+  color:var(--teal);
+  border:1px solid rgba(0,212,170,0.25);
+}
+.btn-teal:hover{background:rgba(0,212,170,0.18);transform:translateY(-1px)}
+.btn-sm{padding:8px 16px;font-size:12px;border-radius:8px}
+
+.section-header {
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.section-label {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.15em;
+}
+.section-line {
+  flex:1;
+  height:1px;
+  background:var(--border);
+}
+
+.assignment-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(190px,1fr));
+  gap:10px;
+  width:100%;
+}
+.asgn-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  cursor:pointer;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+.asgn-card::after {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--amber),transparent);
+  opacity:0;
+  transition:opacity .2s;
+}
+.asgn-card:hover{border-color:var(--border2);transform:translateY(-2px);background:var(--card2)}
+.asgn-card:hover::after{opacity:1}
+.asgn-num {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--amber);
+  letter-spacing:.1em;
+}
+.asgn-title {
+  font-size:12px;
+  font-weight:600;
+  margin-top:6px;
+  color:var(--text);
+  line-height:1.4;
+}
+.asgn-score {
+  margin-top:8px;
+  font-size:11px;
+  color:var(--muted);
+  font-family:var(--mono);
+}
+.asgn-bar{height:2px;background:var(--border);border-radius:1px;margin-top:10px}
+.asgn-bar-fill{height:100%;border-radius:1px;background:var(--amber);transition:width .4s}
+
+/* ── QUIZ ── */
+#quiz-screen {
+  max-width:820px;
+  margin:0 auto;
+  padding:24px 20px;
+  display:none;
+  flex-direction:column;
+  gap:18px;
+}
+#quiz-screen.active{display:flex}
+
+.quiz-header-bar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 20px;
+}
+.quiz-title-block .quiz-mode-label{
+  font-family:var(--display);
+  font-size:16px;
+  font-weight:700;
+}
+.quiz-title-block .quiz-sub{
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  margin-top:2px;
+}
+.quiz-progress-col{flex:1;min-width:200px}
+.progress-meta {
+  display:flex;
+  justify-content:space-between;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.progress-track{
+  height:3px;
+  background:var(--border);
+  border-radius:2px;
+}
+.progress-fill{
+  height:100%;
+  background:var(--amber);
+  border-radius:2px;
+  transition:width .4s ease;
+  box-shadow:0 0 8px var(--amber-glow);
+}
+
+.practice-banner {
+  background:rgba(0,212,170,0.08);
+  border:1px solid rgba(0,212,170,0.2);
+  border-radius:10px;
+  padding:10px 16px;
+  font-size:13px;
+  color:var(--teal);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.question-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px 28px 20px;
+  position:relative;
+  overflow:hidden;
+}
+.question-card::before {
+  content:'';
+  position:absolute;
+  top:-40px;right:-40px;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(245,166,35,0.06),transparent);
+  pointer-events:none;
+}
+
+.q-tag {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--amber);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+  display:inline-block;
+  background:var(--amber-dim);
+  padding:4px 10px;
+  border-radius:6px;
+}
+
+.q-text {
+  font-family:var(--display);
+  font-size:17px;
+  font-weight:600;
+  line-height:1.55;
+  color:var(--text);
+}
+
+.options-grid{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-top:22px;
+}
+.option-btn {
+  background:var(--bg3);
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:13px 16px;
+  font-family:var(--sans);
+  font-size:14px;
+  color:var(--text2);
+  text-align:left;
+  cursor:pointer;
+  transition:all .18s;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.option-btn:hover:not(.answered){
+  border-color:var(--border2);
+  color:var(--text);
+  background:var(--card2);
+}
+.opt-key {
+  font-family:var(--mono);
+  font-size:10px;
+  background:var(--border);
+  color:var(--muted);
+  border-radius:5px;
+  padding:3px 8px;
+  flex-shrink:0;
+  margin-top:2px;
+  transition:all .2s;
+}
+.option-btn.correct{
+  border-color:var(--green);
+  background:var(--green-dim);
+  color:var(--text);
+}
+.option-btn.correct .opt-key{background:var(--green);color:#000}
+.option-btn.wrong{
+  border-color:var(--red);
+  background:var(--red-dim);
+}
+.option-btn.wrong .opt-key{background:var(--red);color:#fff}
+.option-btn.dim{opacity:.35;pointer-events:none}
+
+.explanation-box {
+  margin-top:18px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  animation:fadeSlide .3s ease;
+}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.expl-head {
+  background:var(--bg3);
+  padding:10px 16px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--text2);
+}
+.expl-body {
+  padding:14px 16px;
+  font-size:13.5px;
+  color:var(--text2);
+  line-height:1.75;
+}
+.expl-ref {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--amber);
+  margin-top:10px;
+  opacity:.75;
+}
+
+.quiz-footer {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.score-live {
+  font-family:var(--mono);
+  font-size:13px;
+  display:flex;
+  gap:18px;
+}
+.s-correct{color:var(--green)}
+.s-wrong{color:var(--red)}
+
+/* ── RESULTS ── */
+#result-screen {
+  max-width:800px;
+  margin:0 auto;
+  padding:40px 24px;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+}
+#result-screen.active{display:flex}
+
+.result-ring{position:relative;width:160px;height:160px}
+.result-ring svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--border);stroke-width:8}
+.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.ring-label {
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.ring-pct{
+  font-family:var(--display);
+  font-size:32px;
+  font-weight:800;
+}
+.ring-sub{font-size:11px;color:var(--muted);font-family:var(--mono)}
+
+.result-title{
+  font-family:var(--display);
+  font-size:26px;
+  font-weight:800;
+  text-align:center;
+}
+.result-subtitle{color:var(--text2);text-align:center;max-width:440px;line-height:1.7;font-size:14px}
+
+.table-card {
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  overflow:auto;
+}
+.table-title {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:16px;
+}
+.breakdown-table{width:100%;border-collapse:collapse}
+.breakdown-table th,.breakdown-table td {
+  padding:10px 12px;
+  text-align:left;
+  font-size:12px;
+  border-bottom:1px solid var(--border);
+}
+.breakdown-table th {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.breakdown-table tr:last-child td{border-bottom:none}
+.pct-pill {
+  font-family:var(--mono);
+  font-size:10px;
+  padding:3px 10px;
+  border-radius:100px;
+  display:inline-block;
+}
+.pct-green{background:var(--green-dim);color:var(--green)}
+.pct-yellow{background:rgba(245,158,11,0.12);color:var(--yellow)}
+.pct-red{background:var(--red-dim);color:var(--red)}
+
+.mini-bar {
+  width:80px;height:4px;
+  background:var(--border);
+  border-radius:2px;
+  display:inline-block;
+  vertical-align:middle;
+}
+.mini-fill{height:100%;border-radius:2px;display:block}
+
+.result-actions {
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+
+/* ── NOTES / SUMMARY SCREEN ── */
+#notes-screen {
+  max-width:960px;
+  margin:0 auto;
+  padding:40px 24px;
+  display:none;
+  flex-direction:column;
+  gap:32px;
+}
+#notes-screen.active{display:flex}
+
+.notes-hero {
+  text-align:center;
+}
+.notes-hero h2 {
+  font-family:var(--display);
+  font-size:32px;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:8px;
+}
+.notes-hero p{color:var(--text2);font-size:14px;line-height:1.7}
+
+.weeks-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:14px;
+}
+
+.week-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.week-card:hover{border-color:var(--border2)}
+
+.week-header {
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:var(--card2);
+  cursor:pointer;
+  transition:background .2s;
+}
+.week-header:hover{background:var(--bg3)}
+.week-header-left {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.week-badge {
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  background:var(--amber-dim);
+  color:var(--amber);
+  border:1px solid rgba(245,166,35,0.2);
+  padding:4px 10px;
+  border-radius:6px;
+  letter-spacing:.08em;
+}
+.week-name {
+  font-family:var(--display);
+  font-size:14px;
+  font-weight:700;
+  color:var(--text);
+}
+.week-toggle {
+  font-size:16px;
+  color:var(--muted);
+  transition:transform .3s;
+}
+.week-card.open .week-toggle{transform:rotate(180deg)}
+
+.lectures-list {
+  display:none;
+  padding:10px;
+  gap:6px;
+  flex-direction:column;
+}
+.week-card.open .lectures-list{display:flex}
+
+.lec-btn {
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:11px 14px;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.lec-btn:hover{
+  border-color:var(--amber);
+  background:var(--amber-dim);
+}
+.lec-btn.has-content{
+  border-color:rgba(0,212,170,0.2);
+}
+.lec-btn.has-content:hover{
+  border-color:var(--teal);
+  background:var(--teal-dim);
+}
+.lec-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.lec-num {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  background:var(--border);
+  padding:3px 8px;
+  border-radius:5px;
+  flex-shrink:0;
+}
+.lec-title {
+  font-size:13px;
+  font-weight:500;
+  color:var(--text2);
+  text-align:left;
+}
+.lec-btn.has-content .lec-title{color:var(--text)}
+.lec-status {
+  font-size:11px;
+  flex-shrink:0;
+}
+
+/* Notes viewer panel */
+.notes-panel {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  display:none;
+}
+.notes-panel.visible{display:block}
+
+.notes-panel-header {
+  padding:16px 20px;
+  background:var(--card2);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.notes-panel-title {
+  font-family:var(--display);
+  font-size:16px;
+  font-weight:700;
+}
+.notes-panel-sub {
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--muted);
+  margin-top:2px;
+}
+.notes-close {
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:7px 12px;
+  color:var(--text2);
+  cursor:pointer;
+  font-size:13px;
+  transition:all .2s;
+}
+.notes-close:hover{border-color:var(--red);color:var(--red)}
+
+.notes-content {
+  padding:24px;
+  min-height:200px;
+  font-size:14px;
+  line-height:1.8;
+  color:var(--text2);
+  white-space:pre-wrap;
+  font-family:var(--sans);
+}
+.notes-empty {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:48px;
+  gap:12px;
+  color:var(--muted);
+  font-family:var(--mono);
+  font-size:13px;
+}
+.notes-empty-icon{font-size:32px;opacity:.4}
+
+/* ── TOAST ── */
+.toast {
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 20px;
+  font-size:13px;
+  z-index:999;
+  opacity:0;
+  transition:all .3s;
+  pointer-events:none;
+  white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+@media(max-width:560px){
+  h1{font-size:28px}
+  .question-card{padding:18px}
+  .btn{padding:11px 20px}
+  .top-nav{padding:12px 16px}
+  .nav-brand span{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- NAV -->
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <div class="nav-dot"></div>
+      <span>IIoT & Industry 4.0</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active-tab" onclick="goHome()">🏠 Home</button>
+      <button class="nav-link" id="notes-nav-btn" onclick="goNotes()">📚 Notes</button>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <div id="home-screen" class="screen active">
+    <div class="hero-eyebrow">NPTEL Exam Prep</div>
+    <h1>Ace Your<br/><span>IIoT Exam</span></h1>
+    <p class="subtitle">180 questions across 12 assignments. Practice, track mistakes, and improve your score.</p>
+
+    <div class="stats-row">
+      <div class="stat-chip"><div class="num">180</div><div class="lbl">Questions</div></div>
+      <div class="stat-chip"><div class="num">12</div><div class="lbl">Assignments</div></div>
+      <div class="stat-chip"><div class="num" id="best-score-display">—</div><div class="lbl">Best Score</div></div>
+      <div class="stat-chip"><div class="num" id="wrong-bank-display">0</div><div class="lbl">Practice Bank</div></div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary" onclick="startMockTest()">⚡ Full Mock Test</button>
+      <button class="btn btn-teal" id="practice-btn" onclick="startPractice()">🔁 Practice Mistakes</button>
+      <button class="btn btn-secondary" onclick="goNotes()">📚 View Notes</button>
+    </div>
+
+    <div style="width:100%">
+      <div class="section-header">
+        <span class="section-label">Practice by Assignment</span>
+        <div class="section-line"></div>
+      </div>
+    </div>
+    <div class="assignment-grid" id="assignment-grid"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-screen" class="screen">
+    <div class="quiz-header-bar">
+      <div class="quiz-title-block">
+        <div class="quiz-mode-label" id="quiz-mode-label">Mock Test</div>
+        <div class="quiz-sub" id="quiz-sub-label"></div>
+      </div>
+      <div class="quiz-progress-col">
+        <div class="progress-meta">
+          <span id="q-counter">Q 1 / 180</span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="quitQuiz()">✕ Quit</button>
+    </div>
+
+    <div id="practice-banner" class="practice-banner" style="display:none">
+      🔁 <span><strong style="color:var(--teal)">Practice Mode</strong> — reviewing <span id="wrong-count-label">0</span> wrong answers</span>
+    </div>
+
+    <div class="question-card" id="question-card">
+      <div class="q-tag" id="q-tag">A01 · Q1</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options-grid" id="options-grid"></div>
+      <div id="explanation-area"></div>
+    </div>
+
+    <div class="quiz-footer">
+      <div class="score-live">
+        <span class="s-correct">✓ <span id="live-correct">0</span> correct</span>
+        <span class="s-wrong">✗ <span id="live-wrong">0</span> wrong</span>
+      </div>
+      <button class="btn btn-primary" id="next-btn" style="display:none" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-screen" class="screen">
+    <div class="result-ring">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle class="ring-bg" cx="80" cy="80" r="70"/>
+        <circle class="ring-fill" id="ring-fill" cx="80" cy="80" r="70"
+          stroke="url(#rg)" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
+        <defs>
+          <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f5a623"/>
+            <stop offset="100%" stop-color="#00d4aa"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="ring-label">
+        <div class="ring-pct" id="ring-pct">0%</div>
+        <div class="ring-sub">Score</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="result-title" id="result-title">Test Complete!</div>
+      <p class="result-subtitle" id="result-subtitle"></p>
+    </div>
+
+    <div class="table-card">
+      <div class="table-title">Assignment Breakdown</div>
+      <table class="breakdown-table" id="breakdown-table">
+        <thead><tr><th>Assignment</th><th>Score</th><th>Result</th><th></th></tr></thead>
+        <tbody id="breakdown-body"></tbody>
+      </table>
+    </div>
+
+    <div class="result-actions" id="result-actions"></div>
+  </div>
+
+  <!-- NOTES -->
+  <div id="notes-screen" class="screen">
+    <div class="notes-hero">
+      <h2>📚 Lecture Notes</h2>
+      <p>Select a week, then pick a lecture to read your summary notes.<br/>Click any lecture button to add or view its content.</p>
+    </div>
+
+    <!-- Notes viewer panel -->
+    <div class="notes-panel" id="notes-panel">
+      <div class="notes-panel-header">
+        <div>
+          <div class="notes-panel-title" id="notes-panel-title">Week 1 — Lecture 1</div>
+          <div class="notes-panel-sub" id="notes-panel-sub">IoT Basics & Connectivity</div>
+        </div>
+        <button class="notes-close" onclick="closeNotesPanel()">✕ Close</button>
+      </div>
+      <div class="notes-content" id="notes-content-area">
+        <div class="notes-empty">
+          <div class="notes-empty-icon">📝</div>
+          <span>No notes added yet for this lecture.</span>
+          <span style="font-size:11px;margin-top:4px">Edit the HTML file to add your summary.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="weeks-grid" id="weeks-grid"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NOTES DATA — ADD YOUR SUMMARIES HERE
+     Find the NOTES_DATA object below.
+     Each key is "W{week}_L{lecture}", e.g. "W1_L1" for Week 1 Lecture 1.
+     Replace the empty string "" with your summary text.
+     You can use plain text with line breaks.
+═══════════════════════════════════════════════════════ -->
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  📝 NOTES DATA — ADD YOUR LECTURE SUMMARIES HERE
+//
+//  Format: "W{week}_L{lecture}": `your notes here`
+//
+//  Example:
+//  "W1_L1": `Zero-order systems: output follows input instantly.
+//  Potentiometer is the classic example.
+//  Sensors classified as: zero, first, second order systems.`
+// ═══════════════════════════════════════════════════════════════════
+const NOTES_DATA = {
+  "W1_L1": "",   // Week 1, Lecture 1
+  "W1_L2": "",   // Week 1, Lecture 2
+  "W1_L3":`I. IoT Networking Challenges
+- Constraints: Low processing power, small physical size, and energy/battery limitations.
+- Networks: Often "lossy" with high packet loss and frequent topology changes.
+- Key Insight: The classical Internet stack is too resource-heavy for these devices.
+
+II. The "IoT Tree" Analogy (ARM)
+- Roots (Technologies): Base protocols like Wi-Fi, Bluetooth, and Zigbee.
+- Trunk (The Framework): The middle layer that allows devices to understand each other.
+- Leaves (Applications): Final use cases like Smart Healthcare and Smart Cities.
+
+III. Connection Solutions
+- Proprietary: "Private language" solutions. Causes "Vendor Lock-in" where you are stuck with one company's hardware/software.
+- IETF IP-Standard: The "Open" way.
+    * 6LoWPAN: Shrinks IPv6 headers to fit in low-power packets.
+    * ROLL: Optimized routing for energy and storage.
+    * CoRE: Treats sensors as "web resources."
+
+IV. Quality of Service (QoS)
+- Timeliness: Ensures data isn't stale (Deadline Policy).
+- Availability: Data remains accessible even if a sensor is offline.
+- Delivery: Guarantees the message actually reached the destination.`,   // Week 1, Lecture 3
+  "W1_L4": "",   // Week 1, Lecture 4
+  "W1_L5": "",   // Week 1, Lecture 5
+
+  "W2_L1": "",
+  "W2_L2": "",
+  "W2_L3": "",
+  "W2_L4": "",
+  "W2_L5": "",
+
+  "W3_L1": "",
+  "W3_L2": "",
+  "W3_L3": "",
+  "W3_L4": "",
+  "W3_L5": "",
+
+  "W4_L1": "",
+  "W4_L2": "",
+  "W4_L3": "",
+  "W4_L4": "",
+  "W4_L5": "",
+
+  "W5_L1": "",
+  "W5_L2": "",
+  "W5_L3": "",
+  "W5_L4": "",
+  "W5_L5": "",
+
+  "W6_L1": "",
+  "W6_L2": "",
+  "W6_L3": "",
+  "W6_L4": "",
+  "W6_L5": "",
+
+  "W7_L1": "",
+  "W7_L2": "",
+  "W7_L3": "",
+  "W7_L4": "",
+  "W7_L5": "",
+
+  "W8_L1": "",
+  "W8_L2": "",
+  "W8_L3": "",
+  "W8_L4": "",
+  "W8_L5": "",
+
+  "W9_L1": "",
+  "W9_L2": "",
+  "W9_L3": "",
+  "W9_L4": "",
+  "W9_L5": "",
+
+  "W10_L1": "",
+  "W10_L2": "",
+  "W10_L3": "",
+  "W10_L4": "",
+  "W10_L5": "",
+
+  "W11_L1": "",
+  "W11_L2": "",
+  "W11_L3": "",
+  "W11_L4": "",
+  "W11_L5": "",
+
+  "W12_L1": "",
+  "W12_L2": "",
+  "W12_L3": "",
+  "W12_L4": "",
+  "W12_L5": "",
+};
+
+const WEEK_TITLES = [
+  "IoT Basics & Connectivity",
+  "Lean, Industry 4.0 & Smart Factories",
+  "AR/VR, CPS, AI & Big Data",
+  "Cybersecurity & Smart Sensors",
+  "Business Models & IIRA",
+  "Industrial Protocols & 5G",
+  "LPWAN, Edge & Industrial Control",
+  "ML, Analytics & Cloud",
+  "Fog Computing, R & SDN",
+  "6TiSCH, Security & Smart Factories",
+  "Healthcare, Energy & Inventory",
+  "Industry Applications & UAVs",
+];
+
+// ─── QUIZ DATA ───────────────────────────────────────────────────────
+const ASSIGNMENTS = [
+  { title: "IoT Basics & Connectivity", questions: [
+    { q:"Which of the following sensors is an example of a Zero Order System?", opts:["Thermometer","Potentiometer","Accelerometer","Gyroscope"], ans:1, expl:"A zero-order system produces output instantly without energy storage or dynamic lag. A potentiometer is the classic example.", ref:"Slide 12, Week 1 Lecture 1" },
+    { q:"Which Zigbee device type acts as the root and also functions as the network bridge?", opts:["Zigbee Router","Zigbee End Device","Zigbee Coordinator","Zigbee Gateway"], ans:2, expl:"Every Zigbee network requires at least one coordinator, which initializes the network, acts as root node, and serves as the network bridge.", ref:"Page 133, Introduction to IoT by Misra et al." },
+    { q:"Which physical principle primarily explains the operation of hydraulic actuators?", opts:["Pascal's law","Bernoulli's principle","Ideal gas law","Faraday's law"], ans:0, expl:"Pascal's law states pressure applied to confined incompressible fluid is transmitted undiminished in all directions, enabling force multiplication in hydraulic systems.", ref:"Page 196, Introduction to IIoT & Industry 4.0" },
+    { q:"At which OSI layer does the 6LoWPAN protocol primarily operate to enable IPv6 packets over IEEE 802.15.4?", opts:["Physical Layer","Network Layer (Adaptation Layer)","Transport Layer","Application Layer"], ans:1, expl:"6LoWPAN introduces an adaptation layer between MAC and network layer to support IPv6 header compression and fragmentation over IEEE 802.15.4.", ref:"Page 173, Introduction to IoT by Misra et al." },
+    { q:"Which IEEE 802.15.4 variant introduces Direct Sequence Ultra-Wideband (UWB) Physical Layer?", opts:["802.15.4a","802.15.4b","802.15.4e","802.15.4g"], ans:0, expl:"IEEE 802.15.4a specifies new PHY layers including DS-UWB for precise ranging and low-power communications.", ref:"Slide 8, Week 1 Lecture 2" },
+    { q:"In sensor characteristics, the properties of a system's transient response are termed as _____ characteristics.", opts:["Dynamic characteristics","Static characteristics","Time-domain characteristics","Steady-state characteristics"], ans:0, expl:"Transient response behavior is described using dynamic characteristics.", ref:"Slide 7, Week 1 Lecture 1" },
+    { q:"In WirelessHART (IEC 62591) at 2.4 GHz ISM band, what is the frequency gap between adjacent channels?", opts:["2 MHz","5 MHz","20 MHz","25 MHz"], ans:1, expl:"WirelessHART follows IEEE 802.15.4 channelization with 5 MHz spacing between adjacent channels.", ref:"Slide 23, Week 1 Lecture 2" },
+    { q:"A Passive NFC device can neither transmit nor read any data.", opts:["True","False"], ans:1, expl:"A passive NFC device CAN transmit data when energized by an active reader, but cannot read data from other devices.", ref:"Slide 20, Week 1 Lecture 3" },
+    { q:"What is the data rate of Bluetooth 2.0?", opts:["1 Mbps","2 Mbps","3 Mbps","4 Mbps"], ans:2, expl:"Bluetooth 2.0 supports an enhanced data rate of up to 3 Mbps.", ref:"Slide 13, Week 1 Lecture 3" },
+    { q:"The primary focus of ISA 100.11a is the implementation of _____ in the industrial environment.", opts:["Automation","Connectivity","Predictive maintenance","Security"], ans:0, expl:"ISA 100.11a is designed to support industrial automation using reliable and secure wireless communication.", ref:"Slide 8, Week 1 Lecture 3" },
+    { q:"Classical Internet is not meant for constrained IoT devices.", opts:["True","False"], ans:0, expl:"Classical Internet protocols are resource-intensive and unsuitable for constrained IoT devices without adaptations.", ref:"Slide 2, Week 1 Lecture 4" },
+    { q:"IoT devices register resources to the Resource Directory using which interface?", opts:["Lookup Interface (LI)","Transport Interface (TI)","Registration Interface (RI)","Application Interface (AI)"], ans:2, expl:"IoT devices register their available resources with the Resource Directory using the Registration Interface (RI).", ref:"Slide 10, Week 1 Lecture 4" },
+    { q:"Which data timeliness policy mandates dropping stale data and notifying that a deadline was missed?", opts:["Latency budget policy","Deadline policy","Retention policy","Priority policy"], ans:1, expl:"The Deadline policy enforces time constraints by dropping outdated data and notifying the application of missed deadlines.", ref:"Slide 14, Week 1 Lecture 4" },
+    { q:"MQTT works on the Request/Response framework on top of UDP.", opts:["True","False"], ans:1, expl:"MQTT uses a Publish/Subscribe model and operates over TCP/IP, not UDP.", ref:"Slide 4, Week 1 Lecture 5" },
+    { q:"Which of the following is/are advantages of XMPP?", opts:["Interoperability","Extensibility","Flexibility","All of these"], ans:3, expl:"XMPP supports interoperability, extensibility, and flexibility, making it suitable for diverse IoT scenarios.", ref:"Slide 15, Week 1 Lecture 5" }
+  ]},
+  { title: "Lean, Industry 4.0 & Smart Factories", questions: [
+    { q:"Which type of waste in the Lean Production System is defined as 'Non value-added movement of people'?", opts:["Transportation","Motion","Waiting","Defects"], ans:1, expl:"Motion refers to non value-added movement of people, distinct from Transportation which involves movement of materials.", ref:"Slide 5, Week 2 Lecture 3" },
+    { q:"Which business model value proposition exists when a bundle of goods/services has higher value than individual products?", opts:["Efficiency-centric","Novelty-centric","Lock-in centric","Complementary"], ans:3, expl:"Complementaries exist when a bundle of goods/services provides higher value than the sum of individual offerings.", ref:"Page 65, Introduction to IIoT & Industry 4.0" },
+    { q:"What causes 'Processing waste' in Lean Manufacturing?", opts:["Producing products before demand","Use of inappropriate tools for processing","Excess inventory on factory floor","Non-value added movement of personnel"], ans:1, expl:"Processing waste arises from the use of inappropriate tools or methods that increase production cost without adding value.", ref:"Page 173, Introduction to IIoT & Industry 4.0" },
+    { q:"Which resource primarily achieves 'Optimization' in smart and connected products?", opts:["Optimization algorithms","Custom software","External data sources","Sensors only"], ans:0, expl:"Smart and connected products primarily utilize optimization algorithms as the key resource to achieve Optimization.", ref:"Slide 9, Week 2 Lecture 4" },
+    { q:"Which 'New Material' under Physical Megatrends is described as stronger than steel but thinner than a human hair?", opts:["Carbon Fiber","Graphene","Aerogel","Titanium Alloy"], ans:1, expl:"Graphene is described as stronger than steel while being thinner than the width of a human hair.", ref:"Page 56, Introduction to IIoT & Industry 4.0" },
+    { q:"What are the three types of work noticed when analyzing 'Value streams'?", opts:["Design, Production, and Delivery","Value-added, Incidental, and Pure Waste","Manual, Automated, and Hybrid","Planning, Execution, and Monitoring"], ans:1, expl:"Value stream analysis identifies value-added, incidental, and pure waste work.", ref:"Slide 7, Week 2 Lecture 3" },
+    { q:"What are the three categories of Megatrends driving the Fourth Industrial Revolution?", opts:["Economic, Social, Political","Physical, Digital, Biological","Hardware, Software, Network","Local, National, Global"], ans:1, expl:"Megatrends are classified into Physical, Digital, and Biological categories.", ref:"Slide 14, Week 2 Lecture 1" },
+    { q:"Which material (except Graphene) is cited as 'New Materials' under Physical Megatrends?", opts:["Silicon","Thermoset plastics","Copper","Aluminum"], ans:1, expl:"Thermoset plastics along with Graphene is listed as an example of new materials under Physical Megatrends.", ref:"Slide 19, Week 2 Lecture 1" },
+    { q:"How is Sustainability defined in the context of Manufacturing Industry?", opts:["To increase profit margins annually","To continue at a fixed rate","To eliminate all waste products","To automate all processes"], ans:1, expl:"Sustainability is defined as the ability to continue at a fixed rate.", ref:"Slide 2, Week 2 Lecture 2" },
+    { q:"In 'Government Regulations,' what does EPA stand for?", opts:["Economic Policy Agency","Environmental Protection Agencies","Energy Production Association","Employment Protection Act"], ans:1, expl:"EPA stands for Environmental Protection Agencies responsible for maintaining environmental rules.", ref:"Slide 17, Week 2 Lecture 2" },
+    { q:"Which is a characteristic of an economic depression?", opts:["Duration is less than a year","High employment rates","Exponential unemployment increase","Increase in available credit"], ans:2, expl:"Economic depression is characterized by an exponential increase in unemployment.", ref:"Slide 25, Week 2 Lecture 2" },
+    { q:"Which layer in smart and connected products architecture collects and acquires data?", opts:["Digital layer","Connectivity layer","Physical layer","Application layer"], ans:2, expl:"The Physical layer is responsible for collecting and acquiring data from objects or the environment.", ref:"Slide 20, Week 2 Lecture 4" },
+    { q:"Which is a 'Lock-in centric' value creation model?", opts:["Focusing on novelty","Improving transaction efficiency","Preventing customer migration","Offering complementary products"], ans:2, expl:"Lock-in centric models focus on preventing customer migration.", ref:"Slide 16, Week 2 Lecture 4" },
+    { q:"Which characteristic of smart factories involves 'Self-configuration'?", opts:["Proactivity","Transparency","Agility","Connection"], ans:2, expl:"Self-configuration is listed as a key aspect of Agility in smart factories.", ref:"Slide 16, Week 2 Lecture 5" },
+    { q:"In the automation pyramid of a smart factory, which level is at the very top?", opts:["Device level","Control level","Manufacturing execution system level","ERP level"], ans:3, expl:"The automation pyramid places the ERP level at the top.", ref:"Slide 21, Week 2 Lecture 5" }
+  ]},
+  { title: "AR/VR, CPS, AI & Big Data", questions: [
+    { q:"Who developed the first functioning Augmented Reality (AR) system in 1992?", opts:["Ivan Sutherland","Louis Rosenberg","Thamos Caudell","Morton Heilig"], ans:1, expl:"The timeline shows that Louis Rosenberg developed the first functioning AR system in 1992.", ref:"Slide 6, Week 3 Lecture 3" },
+    { q:"In the 5C Architecture of CPS, which level provides 'Collaborative Diagnostics'?", opts:["Cyber Level","Cognition Level","Configuration Level","Conversion Level"], ans:1, expl:"The Cognition level supports collaborative diagnostics and decision making.", ref:"Slide 16, Week 3 Lecture 1" },
+    { q:"AR technologies are widely used in medical science to perform complex surgeries in Neurosurgery, MRI, and X-Ray systems.", opts:["True","False"], ans:0, expl:"AR technologies are widely applied in medical science for complex surgical procedures.", ref:"Page 154, Introduction to IIoT & Industry 4.0" },
+    { q:"Which 'V' of Big Data refers to support for diverse categories and formats of data?", opts:["Volume","Velocity","Variety","Value"], ans:2, expl:"Variety represents the heterogeneous nature and diversity of Big Data formats.", ref:"Slide 9, Week 3 Lecture 5" },
+    { q:"What are the three main steps of 'Data pre-processing' of relational data in Industry 4.0?", opts:["Collection, Transmission, Storage","Integration, Clearing, Redundancy Mitigation","Analysis, Visualization, Decision Making","Encryption, Compression, Archiving"], ans:1, expl:"Relational data pre-processing involves integration, clearing, and redundancy mitigation.", ref:"Slide 16, Week 3 Lecture 5" },
+    { q:"What is the first step in the working of a Virtual Reality (VR) system?", opts:["Display screen shows user view through lenses","Processing unit creates sensations","Lenses focus and reshape image for each eye","Sensors estimate user's motion and direction"], ans:3, expl:"The VR workflow begins with sensors estimating the user's motion and direction.", ref:"Slide 23, Week 3 Lecture 3" },
+    { q:"Brain-machine interfaces are engineered systems based on cognition and neuroscience and are a part of CPS.", opts:["True","False"], ans:0, expl:"Brain-machine interfaces are engineered systems based on cognition and neuroscience within CPS applications.", ref:"Slide 8, Week 3 Lecture 1" },
+    { q:"What are PMUs in the context of CPS for Smart Grid?", opts:["Power Management Unit","Phasor Measurement Unit","Performance Monitoring Unit","Project Management Unit"], ans:1, expl:"PMUs measure synchronized voltage and current phasors in power grids.", ref:"Slide 10, Week 3 Lecture 1" },
+    { q:"Which option best describes a Collaboration Platform?", opts:["Manufacturing hardware device","Business networking software","Entertainment social app","Financial record database"], ans:1, expl:"Collaboration platforms combine organizational networking capabilities for operations.", ref:"Slide 2, Week 3 Lecture 2" },
+    { q:"What are the five phases of the Product Lifecycle?", opts:["Plan, Do, Check, Act","Design, Build, Test, Deploy","Ideate, Create, Market, Sell","Visualize, Explain, Perceive, Retire"], ans:3, expl:"The product lifecycle consists of Visualize, Explain, Perceive, Use/Support, and Dispose/Retire phases.", ref:"Slide 12, Week 3 Lecture 2" },
+    { q:"Which Technique/Method is proposed to refine production across the lifecycle?", opts:["ABC (Activity Based Costing)","XYZ Analysis","PQR Theory","LMN Modeling"], ans:0, expl:"ABC is listed as a method to refine production across the lifecycle.", ref:"Slide 21, Week 3 Lecture 2" },
+    { q:"Which best describes Artificial Intelligence (AI)?", opts:["Hardware manufacturing process","Manmade thinking power","Database management system","Manual data entry"], ans:1, expl:"AI is defined as manmade thinking power enabling intuitive decision-making.", ref:"Slide 3, Week 3 Lecture 4" },
+    { q:"Declarative knowledge is also known as _____.", opts:["Operational knowledge","Heuristic knowledge","Relational knowledge","Procedural knowledge"], ans:2, expl:"Declarative knowledge is classified as relational knowledge.", ref:"Slide 6, Week 3 Lecture 4" },
+    { q:"Which is a use case of AI in Industry 4.0?", opts:["Increasing manual labor","Reducing internet usage","Slowing production cycles","Ensuring machine safety"], ans:3, expl:"AI in Industry 4.0 is used to ensure machine safety and efficiency.", ref:"Slide 11, Week 3 Lecture 4" },
+    { q:"Which statement best describes characteristics of Unstructured data?", opts:["Possesses pre-defined model","Stored in relational databases","Managed by SQL","No pre-defined model"], ans:3, expl:"Unstructured data does not possess any predefined model.", ref:"Slide 5, Week 3 Lecture 5" }
+  ]},
+  { title: "Cybersecurity & Smart Sensors", questions: [
+    { q:"Which component of Cybersecurity protects applications using firewalls?", opts:["Application Security","Network Security","Cloud Security","End-user Education"], ans:0, expl:"Application security protects applications using software and hardware countermeasures such as firewalls.", ref:"Page 66, Introduction to IIoT & Industry 4.0" },
+    { q:"What is Zephyr?", opts:["A Smart Sensor","An Website","An OS","None of these"], ans:2, expl:"Zephyr is listed as a supporting operating system in the context of smart sensors.", ref:"Slide 13, Week 4 Lecture 4" },
+    { q:"Most ransomware attacks use _____, where the user receives a legal file and is forced to download it.", opts:["Worm","Virus","Trojan","Malware"], ans:2, expl:"Ransomware attacks commonly use Trojans delivered as legitimate-looking attachments.", ref:"Page 68, Introduction to IIoT & Industry 4.0" },
+    { q:"In SDCMA, which component is responsible for 'detecting abnormality'?", opts:["Control Elements (CE)","Hardware Plane","Ensemble Intelligence Framework (EIF)","Software Plane"], ans:2, expl:"The Ensemble Intelligence Framework is responsible for detecting abnormalities in SDCMA.", ref:"Slide 21, Week 4 Lecture 1" },
+    { q:"_____ typically form the core of the smart sensor nodes.", opts:["Transistors","Microprocessors","MOSFETS","Diodes"], ans:1, expl:"Microprocessors typically form the core of smart sensor nodes.", ref:"Page 86, Introduction to IIoT & Industry 4.0" },
+    { q:"Which cybersecurity component involves 'strategies to maintain availability, integrity, and confidentiality of business data'?", opts:["Network Security","Operational Security","Information Security","Physical Security"], ans:2, expl:"Information security focuses on protecting data using the CIA triad.", ref:"Page 66, Introduction to IIoT & Industry 4.0" },
+    { q:"Which of the following is NOT a protected asset in cybersecurity?", opts:["Hardware","Software","Data","Public domain information"], ans:3, expl:"Public domain information is not considered a protected cybersecurity asset.", ref:"Slide 3, Week 4 Lecture 1" },
+    { q:"How does IIoT modify traditional automation techniques?", opts:["By removing all sensors","By exploiting IT technology","By using manual tools","By ignoring data"], ans:1, expl:"IIoT modifies traditional automation by exploiting information technology.", ref:"Slide 7, Week 4 Lecture 2" },
+    { q:"Which has been identified as a major challenge in IIoT deployment?", opts:["Excessive standardization","Lack of generated data","Surplus of skilled workers","Data integration challenges"], ans:3, expl:"Data integration is listed as a major challenge in IIoT deployment.", ref:"Slide 8, Week 4 Lecture 2" },
+    { q:"How does Industrial Internet assist Power Production?", opts:["Increases inspection costs","Locates broken equipment easily","Disconnects the grid","Hides performance data"], ans:1, expl:"The Industrial Internet helps locate broken power equipment easily.", ref:"Slide 20, Week 4 Lecture 3" },
+    { q:"The Industrial Internet can benefit commercial aviation industries by improving both airline operations and asset management.", opts:["True","False"], ans:0, expl:"The Industrial Internet improves airline operations and asset management.", ref:"Slide 17, Week 4 Lecture 3" },
+    { q:"What is considered the primary source of IIoT data?", opts:["Cloud Server","Actuator","Sensor","Microprocessor"], ans:2, expl:"Sensors are identified as the primary source of IIoT data.", ref:"Slide 2, Week 4 Lecture 4" },
+    { q:"Conventional Sensing is primarily involved in _____.", opts:["Feedback automation","Cloud computing","Internet connectivity","Big data analytics"], ans:0, expl:"Conventional sensing is involved in feedback automation of industrial control systems.", ref:"Slide 5, Week 4 Lecture 4" },
+    { q:"Which Industry 4.0 challenge is directly associated with ageing society and lack of skilled workers?", opts:["Dynamic market conditions","Resource utilization","Constrained workforce","Product management"], ans:2, expl:"Ageing society and lack of skilled workers are categorized under constrained workforce.", ref:"Slide 5, Week 4 Lecture 5" },
+    { q:"Efficient use of materials, water, and energy is categorized under which expected feature of Industry 4.0?", opts:["Competitiveness","Innovation","Workforce","Efficiency"], ans:3, expl:"Efficient resource usage is associated with the efficiency feature of Industry 4.0.", ref:"Slide 7, Week 4 Lecture 5" }
+  ]},
+  { title: "Business Models & IIRA", questions: [
+    { q:"In 'Value Proposition' building block, which is considered a qualitative value?", opts:["Price","Post-purchase cost reduction","Customer experience","Product performance"], ans:2, expl:"Customer experience is categorized as a qualitative value in the value proposition.", ref:"Slide 4, Week 5 Lecture 2" },
+    { q:"A business model that serves specific and specialized customer groups is known as a:", opts:["Mass market","Segmented market","Niche market","Diversified market"], ans:2, expl:"Niche market business models focus on specific and specialized customer groups.", ref:"Page 102, Introduction to IIoT & Industry 4.0" },
+    { q:"Credits and cash owned by an organization are classified under which asset category?", opts:["Physical assets","Human assets","Intellectual assets","Financial assets"], ans:3, expl:"Financial assets include credits and cash owned by an organization.", ref:"Page 103, Introduction to IIoT & Industry 4.0" },
+    { q:"Which IIoT business model component focuses on solving complexities in interactions between business actors?", opts:["Value Proposition","Value Network","Value Capturing","Value Communication"], ans:3, expl:"Value Communication addresses interaction complexities and uncertainties among IIoT stakeholders.", ref:"Page 109, Introduction to IIoT & Industry 4.0" },
+    { q:"In IIRA's Information Domain, which 'V' refers to the trustworthiness or quality of data?", opts:["Volume","Velocity","Variety","Veracity"], ans:3, expl:"Veracity refers to the trustworthiness and quality of data.", ref:"Page 21, Introduction to IIoT & Industry 4.0" },
+    { q:"Which is considered a 'Lagging KPI' for occupational safety?", opts:["% workers with adequate safety training","Number of OSH audits performed","Frequency of unsafe behavior observed","Number of production days lost due to sickness"], ans:3, expl:"Production days lost due to sickness absence is an outcome-based lagging indicator.", ref:"Page 124, Introduction to IIoT & Industry 4.0" },
+    { q:"Caterpillar uses IoT combined with which technology for machine monitoring?", opts:["Virtual Reality (VR)","Augmented Reality (AR)","Blockchain technology","Quantum computing"], ans:1, expl:"Caterpillar uses IoT combined with augmented reality for real-time machine monitoring.", ref:"Slide 4, Week 5 Lecture 1" },
+    { q:"Maersk uses IoT primarily for _____.", opts:["Smart Logistics","Manufacturing cars","Generating electricity","Mining coal"], ans:0, expl:"Maersk applies IoT mainly for smart logistics operations.", ref:"Slide 17, Week 5 Lecture 1" },
+    { q:"What does a Business Model primarily describe?", opts:["Technical hardware specifications","Rationale of creating value","Employee holiday schedules","Office floor plan"], ans:1, expl:"A business model explains how an organization creates, delivers, and captures value.", ref:"Slide 2, Week 5 Lecture 2" },
+    { q:"Lack of interoperability leads to increased complexity.", opts:["True","False"], ans:0, expl:"Lack of interoperability increases system complexity and cost.", ref:"Slide 26, Week 5 Lecture 3" },
+    { q:"The three categories of IIoT business models are Cloud-based, Process-Oriented, and _____ Business Model.", opts:["Hardware-Oriented","Service-Oriented","Product-Oriented","Data-Oriented"], ans:1, expl:"IIoT business models are classified as Cloud-based, Service-Oriented, and Process-Oriented.", ref:"Slide 4, Week 5 Lecture 3" },
+    { q:"In IIRA Framework, what are defined as 'collection of ideas which describe, analyze, and solve specific concerns'?", opts:["Stakeholders","Architecture Frames","Viewpoints","Testbeds"], ans:2, expl:"Viewpoints are collections of ideas addressing specific architectural concerns.", ref:"Slide 9, Week 5 Lecture 4" },
+    { q:"Which architecture pattern allows fast device-to-device integration with minimum response time?", opts:["Three-tier architecture","Client-Server architecture","Layered Databus pattern","Gateway-mediated architecture"], ans:2, expl:"Layered Databus architecture enables fast device-to-device integration.", ref:"Slide 23, Week 5 Lecture 4" },
+    { q:"Which element in Usage Viewpoint of IIRA is the 'basic unit of work' carried out by a party?", opts:["Task","Activity","Agent","Workflow"], ans:0, expl:"Task is defined as the basic unit of work in the Usage Viewpoint.", ref:"Slide 10, Week 5 Lecture 5" },
+    { q:"Which IIRA viewpoint relates to technical representation including interfaces, protocols, and behaviors?", opts:["Functional Viewpoint","Implementation Viewpoint","Usage Viewpoint","Business Viewpoint"], ans:1, expl:"The Implementation viewpoint focuses on technical representation including interfaces and protocols.", ref:"Slide 23, Week 5 Lecture 5" }
+  ]},
+  { title: "Industrial Protocols & 5G", questions: [
+    { q:"What is the usual packet size requirement for uRLLC?", opts:["8 B","16–32 B","32–200 B","1024 B"], ans:2, expl:"uRLLC requires packet sizes in the range of 32 to 200 bytes for ultra-low latency and high reliability.", ref:"Slide 21, Week 6 Lecture 5" },
+    { q:"ModBus-TCP is primarily designed to run over _____.", opts:["Serial RS-232 links","Standard Ethernet and TCP/IP","Bluetooth Low Energy","Satellite communication"], ans:1, expl:"ModBus-TCP is an implementation of Modbus over Ethernet and TCP/IP stack for industrial automation.", ref:"Pages 214-215, Introduction to IIoT & Industry 4.0" },
+    { q:"Which Profibus variant is designed for high-speed communication using RS-485 or fiber optics?", opts:["Profibus PA","Profibus FMS","Profibus DP","Profinet"], ans:2, expl:"Profibus DP is designed for high-speed data exchange using RS-485 or fiber optic communication.", ref:"Page 206, Introduction to IIoT & Industry 4.0" },
+    { q:"What is the maximum transmission rate of 'Standard CC-Link' technology?", opts:["156 kbps","500 kbps","10 Mbps","1 Gbps"], ans:2, expl:"The basic CC-Link technology supports a maximum transmission rate of 10 Mbps.", ref:"Page 213, Introduction to IIoT & Industry 4.0" },
+    { q:"Which gas sensing method relies specifically on 'Electrical Variation' for detection?", opts:["Acoustic Methods","Optic Methods","Metal Oxide Semiconductors (MOS)","Calorimetric Method"], ans:2, expl:"Metal Oxide Semiconductor based sensors detect gases through changes in their electrical properties.", ref:"Slide 3, Week 6 Lecture 2" },
+    { q:"In manufacturing, Fieldbus is primarily used for which type of data transfer?", opts:["Clock synchronization","High-performance analytics","Periodic I/O data transfer","WAN management"], ans:2, expl:"Fieldbus systems are designed for periodic input and output data transfer between field devices and controllers.", ref:"Slide 2, Week 6 Lecture 3" },
+    { q:"Under which sensor category do 'smoke detectors' and 'alcohol detectors' fall?", opts:["Optical sensors","Thermal sensors","Chemical sensors","Electrical sensors"], ans:2, expl:"Smoke detectors and alcohol detectors are chemical sensors as they detect substances through chemical interactions.", ref:"Page 189, Introduction to IIoT & Industry 4.0" },
+    { q:"Which CC-Link protocol variant ensures error-free communication of large data through Industrial Ethernet?", opts:["CC-Link Safety","CC-Link LT","CC-Link IE","CC-Link RTU"], ans:2, expl:"CC-Link IE leverages Industrial Ethernet for reliable and error-free transmission of large volumes of industrial data.", ref:"Page 212, Introduction to IIoT & Industry 4.0" },
+    { q:"IIoT systems emphasize improvement of which of the following?", opts:["Only profitability","Only system throughput","Efficiency, productivity, health, and safety","Hardware miniaturization alone"], ans:2, expl:"IIoT systems emphasize improving efficiency, productivity, health, and safety.", ref:"Slide 2, Week 6 Lecture Material 1" },
+    { q:"The output voltage of the LM35 sensor is linearly proportional to Kelvin temperature.", opts:["True","False"], ans:1, expl:"The LM35 output voltage is linearly proportional to Celsius temperature, not Kelvin.", ref:"Slide 15, Week 6 Lecture Material 1" },
+    { q:"Air quality monitoring systems with gas sensing units are primarily deployed to _____.", opts:["Improve network bandwidth","Avoid risks of harmful gas exposure","Reduce hardware cost","Increase cloud storage"], ans:1, expl:"These systems are deployed to avoid risks of harmful gas exposure.", ref:"Slide 2, Week 6 Lecture Material 2" },
+    { q:"Which of the following belongs to the Fieldbus category?", opts:["Profinet","EtherNet/IP","TSN","Modbus-RTU"], ans:3, expl:"Modbus-RTU is explicitly classified under Fieldbus technologies.", ref:"Slide 3, Week 6 Lecture Material 3" },
+    { q:"Which Profibus variant handles communication between PCs and Programmable Logic Controllers?", opts:["Profibus DP","Profibus PA","Profibus FMS","Profibus IE"], ans:2, expl:"Profibus FMS is designed for communication between PCs and PLCs.", ref:"Slide 4, Week 6 Lecture Material 4" },
+    { q:"Which network topology is used by Interbus?", opts:["Bus","Star","Active ring","Hybrid"], ans:2, expl:"Interbus uses an active ring topology.", ref:"Slide 8, Week 6 Lecture Material 4" },
+    { q:"Which frequency band is classified as high band in 5G NR?", opts:["< 1 GHz","1–6 GHz","> 24 GHz","6–24 GHz"], ans:2, expl:"High-band 5G NR operates above 24 GHz in the millimeter-wave spectrum.", ref:"Slide 7, Week 6 Lecture Material 5" }
+  ]},
+  { title: "LPWAN, Edge & Industrial Control", questions: [
+    { q:"What does LPWAN stand for?", opts:["Low Power Wireless Access Network","Long Power Wide Area Network","Low Power Wide Area Network","Long Power Wireless Area Network"], ans:2, expl:"LPWAN expands to Low Power Wide Area Network.", ref:"Slide 3, Week 7 Lecture Material 1" },
+    { q:"LoRa technology operates in which frequency bands?", opts:["License-free sub-gigahertz bands","Licensed microwave bands","Optical frequency bands","Millimeter-wave bands"], ans:0, expl:"LoRa operates in license-free sub-gigahertz radio frequency bands.", ref:"Slide 4, Week 7 Lecture Material 1" },
+    { q:"What is the maximum wireless throughput achieved by SIGFOX?", opts:["1 kbps","500 bps","10 kbps","100 bps"], ans:3, expl:"SIGFOX supports a maximum wireless throughput of up to 100 bits per second.", ref:"Slide 5, Week 7 Lecture Material 1" },
+    { q:"Which IEEE standard forms the basis of the physical and MAC layers of Zigbee?", opts:["IEEE 802.11","IEEE 802.3","IEEE 802.15.4","IEEE 802.16"], ans:2, expl:"Zigbee physical and MAC layers are based on IEEE 802.15.4.", ref:"Slide 5, Week 7 Lecture Material 2" },
+    { q:"Which is NOT a Zigbee-supported network topology?", opts:["Star","Tree","Mesh","Ring"], ans:3, expl:"Zigbee supports Star, Tree, and Mesh topologies, but not Ring topology.", ref:"Slide 5, Week 7 Lecture Material 2" },
+    { q:"What is Xbee in the context of Zigbee communication?", opts:["A network protocol","A product that uses the Zigbee protocol","A routing algorithm","A MAC-layer standard"], ans:1, expl:"Xbee is a product that implements the Zigbee communication protocol for radio communication.", ref:"Slide 7, Week 7 Lecture Material 2" },
+    { q:"Which sensor in an autonomous vehicle generates data in the range of 20–40 MB/s?", opts:["GPS","RADAR","Camera","SONAR"], ans:2, expl:"Camera sensors generate data in the range of 20–40 MB/s in autonomous vehicles.", ref:"Slide 2, Week 7 Lecture Material 3" },
+    { q:"What type of computing processes data closer to sensors before sending to cloud?", opts:["Edge computing","Centralized computing","Distributed computing","Batch computing"], ans:0, expl:"Edge computing performs data processing close to sensors before transmitting to the cloud.", ref:"Slide 6, Week 7 Lecture Material 3" },
+    { q:"In an end-to-end IIoT processing pipeline, where are rules initially configured?", opts:["At the sensor nodes","In the cloud","At the edge analytics agent","At the actuators"], ans:1, expl:"Rules and actions are initially configured in the cloud before deployment to edge components.", ref:"Slide 8, Week 7 Lecture Material 3" },
+    { q:"What is the main objective of AR drones-based precision agriculture?", opts:["Monitoring soil moisture","Precise fertilizer spray to weeds","Autonomous harvesting","Livestock monitoring"], ans:1, expl:"AR drones-based precision agriculture focuses on precise fertilizer spraying targeted at weeds.", ref:"Slide 7, Week 7 Lecture Material 4" },
+    { q:"SWAMP enables a smart management layer between which two systems?", opts:["Water distribution network and farm-based irrigation","Cloud services and mobile applications","Sensors and actuators","Enterprise and automation networks"], ans:0, expl:"SWAMP provides a smart management layer between water distribution networks and farm-based irrigation systems.", ref:"Slide 5, Week 7 Lecture Material 4" },
+    { q:"What do process variables represent in an industrial control system?", opts:["Controller decision outputs","Standard operating limits","Values of process parameters measured using sensors","Signals sent to actuators"], ans:2, expl:"Process variables represent measured values of process parameters obtained using sensors.", ref:"Slide 2, Week 7 Lecture Material 5" },
+    { q:"What is the fundamental element of industrial control systems for automatic control?", opts:["Control loops","Sensors","Controllers","Actuators"], ans:0, expl:"Control loops form the fundamental element for automatic control of industrial processes.", ref:"Slide 4, Week 7 Lecture Material 5" },
+    { q:"Which SCADA component interfaces directly with sensors to read and convert data?", opts:["The Supervisory System","The Human Machine Interface (HMI)","The Communication Infrastructure","PLCs and RTUs"], ans:3, expl:"PLCs and RTUs directly interface with sensors and convert analog or digital signals in SCADA systems.", ref:"Page 235, Introduction to IIoT & Industry 4.0" },
+    { q:"What is a primary advantage of PLCs over traditional hard-wired systems?", opts:["They are physically larger and more durable","They can be easily reprogrammed","They operate at much higher voltage","They do not require a power supply"], ans:1, expl:"PLCs can be reprogrammed easily, enabling economical maintenance and system upgrades.", ref:"Page 233, Introduction to IIoT & Industry 4.0" }
+  ]},
+  { title: "ML, Analytics & Cloud", questions: [
+    { q:"What is the purpose of feature extraction in ML?", opts:["Convert raw data into compressed bitstreams only","Convert raw data to information about physical state of the asset","Encrypt sensor data for security","Remove time stamps from data"], ans:1, expl:"Feature extraction converts raw data into information related to the physical state of the asset.", ref:"Slide 8, Week 8 Lecture Material 1" },
+    { q:"What is a primary goal of applying analytics in industrial systems?", opts:["Maximizing data volume","Replacing all controllers with cloud services","Improving operational platform, performance, and safety","Eliminating human workers completely"], ans:2, expl:"Industrial analytics aims to improve operational platforms, performance, and safety.", ref:"Page 244, Introduction to IIoT & Industry 4.0" },
+    { q:"What kind of data does supervised learning require?", opts:["Completely unlabeled streams","Only binary sensor signals","Labeled datasets with known output classes or values","Data without any prior samples"], ans:2, expl:"Supervised learning requires labeled datasets with known outputs for training.", ref:"Page 256, Introduction to IIoT & Industry 4.0" },
+    { q:"Which is explicitly listed as a goal of IIoT analytics?", opts:["Manual inspection","Dynamic operations optimization","Hardware miniaturization","Network routing"], ans:1, expl:"Dynamic operations optimization is explicitly stated as a goal of IIoT analytics.", ref:"Slide 4, Week 8 Lecture Material 1" },
+    { q:"What approach replaces physics-based models in modern IIoT analytics?", opts:["Data-driven modelling using ML and DL","Heuristic optimization","Rule-based control","Manual calibration"], ans:0, expl:"Modern IIoT analytics replaces physics-based models with data-driven modelling using ML and DL.", ref:"Slide 7, Week 8 Lecture Material 1" },
+    { q:"Data Science is an interdisciplinary field involving which areas?", opts:["Only computer science","Only data processing","Only artificial intelligence","CS, statistics, mathematics, ML, and domain expertise"], ans:3, expl:"Data Science integrates computer science, statistics, mathematics, machine learning, and domain expertise.", ref:"Slide 4, Week 8 Lecture Material 2" },
+    { q:"Unsupervised learning is primarily used for identifying similar groups of data called _____.", opts:["Clustering","Classification","Regression","Prediction"], ans:0, expl:"Unsupervised learning is mainly used for clustering similar data points.", ref:"Slide 8, Week 8 Lecture Material 2" },
+    { q:"Which clustering algorithm allows a data point to belong to more than one cluster?", opts:["K-Means","Linear Regression","Decision Tree","Fuzzy c-Means"], ans:3, expl:"Fuzzy c-Means allows data points to belong to multiple clusters.", ref:"Slide 9, Week 8 Lecture Material 2" },
+    { q:"Machine learning algorithms are not useful for _____ data.", opts:["Structured","Temporal","High dimensional","Labeled"], ans:2, expl:"ML algorithms are not useful for high dimensional data.", ref:"Slide 4, Week 8 Lecture Material 3" },
+    { q:"Deep learning mimics the working function of billions of neurons in the human brain.", opts:["True","False"], ans:0, expl:"Deep learning is inspired by the functioning of billions of neurons in the human brain.", ref:"Slide 6, Week 8 Lecture Material 3" },
+    { q:"Platform-as-a-Service mainly allows industries to do what?", opts:["Only deploy hardware","Self-develop applications","Store raw sensor data only","Replace networking infrastructure"], ans:1, expl:"Platform-as-a-Service enables industries to self-develop applications.", ref:"Slide 9, Week 8 Lecture Material 4" },
+    { q:"Which type of data is explicitly mentioned as contributing to cloud demand in IIoT?", opts:["Image data","M2M sensor data","Social media data","Textual reports"], ans:1, expl:"M2M sensor data is explicitly cited as contributing to cloud demand in IIoT.", ref:"Slide 4, Week 8 Lecture Material 4" },
+    { q:"Increase in number of devices makes IIoT ecosystems more complex, necessitating cloud-based device management.", opts:["True","False"], ans:0, expl:"An increase in devices increases complexity, requiring cloud-based device management.", ref:"Slide 9, Week 8 Lecture Material 5" },
+    { q:"What is one key purpose of a Service Level Agreement (SLA) for IIoT?", opts:["Eliminating cloud providers","Promising deliverables from cloud providers","Increasing hardware redundancy","Enforcing local computation"], ans:1, expl:"An SLA defines and promises deliverables from cloud providers.", ref:"Slide 12, Week 8 Lecture Material 5" },
+    { q:"A good SLA should be affordable, quantifiable, controllable, meaningful, mutually acceptable, and _____.", opts:["Flexible","Enforceable","Achievable","Adaptive"], ans:2, expl:"Achievable is explicitly listed as a characteristic of a good SLA.", ref:"Slide 13, Week 8 Lecture Material 5" }
+  ]},
+  { title: "Fog Computing, R & SDN", questions: [
+    { q:"Why is Julia programming considered advantageous?", opts:["It is slower than Python","It merges Python's benefits with C's performance","It is a closed-source language","It does not support parallelism"], ans:1, expl:"Julia combines the ease of Python with the execution speed of C.", ref:"Slide 18, Week 9 Lecture Material 2" },
+    { q:"What relationship does Linear Regression detect?", opts:["Non-linear relationship between binary variables","Clustering pattern in unlabeled data","Random relationship between unrelated variables","Linear relationship between dependent and independent variables"], ans:3, expl:"Linear regression detects a linear relationship between a dependent variable and independent variables.", ref:"Page 257, Introduction to IIoT & Industry 4.0" },
+    { q:"Which core concept defines Software-Defined Networking (SDN)?", opts:["Hardwiring control logic into every switch","Decoupling the control plane from the data plane","Combining all network functions into a single server","Eliminating the need for any software in networking"], ans:1, expl:"SDN is defined by the decoupling of the control plane from the data plane.", ref:"Slide 2, Week 9 Lecture Material 5" },
+    { q:"Fog computing architecture places fog nodes between _____ and the cloud.", opts:["Industrial end devices","Enterprise servers","Mobile applications","Databases"], ans:0, expl:"Fog nodes are placed between industrial end devices and the cloud.", ref:"Slide 4, Week 9 Lecture Material 1" },
+    { q:"What is the major challenge in handling data from sensors and machines in IIoT?", opts:["High cost of sensors","Diversity in protocols, data syntax, and data sources","Lack of storage capacity","Insufficient processing power"], ans:1, expl:"IIoT systems face challenges due to diversity in protocols, data syntax, and data sources.", ref:"Slide 2, Week 9 Lecture Material 1" },
+    { q:"Fog computing in IIoT prevents unnecessary noisy big data crowd at the cloud.", opts:["True","False"], ans:0, expl:"Fog computing filters data at the edge to prevent noisy big data accumulation in the cloud.", ref:"Slide 6, Week 9 Lecture Material 1" },
+    { q:"R is an open source tool for programming, statistical analysis, and graphics representation.", opts:["True","False"], ans:0, expl:"R is an open-source tool used for programming, statistical analysis, and graphical representation.", ref:"Slide 3, Week 9 Lecture Material 2" },
+    { q:"Which R package provides functions for fuzzy clustering, SVM, and naive bayes classifier?", opts:["rpart","e1071","nnet","caret"], ans:1, expl:"The e1071 package supports fuzzy clustering, SVM, and naive bayes classifiers.", ref:"Slide 14, Week 9 Lecture Material 2" },
+    { q:"The basic cloud service models include IaaS, PaaS, and _____.", opts:["DaaS","NaaS","SaaS","FaaS"], ans:2, expl:"SaaS is one of the three basic cloud service models along with IaaS and PaaS.", ref:"Slide 3, Week 9 Lecture Material 3" },
+    { q:"Which Hadoop component contains the utilities that support all other Hadoop components?", opts:["HDFS","MapReduce","Hadoop Common","YARN"], ans:2, expl:"Hadoop Common contains utilities that support all other Hadoop components.", ref:"Slide 17, Week 9 Lecture Material 3" },
+    { q:"What routing protocol does BCube run?", opts:["BSR (Bcube Source Routing)","BGP","OSPF","RIP"], ans:0, expl:"BCube runs a source routing protocol known as BSR.", ref:"Slide 11, Week 9 Lecture Material 4" },
+    { q:"Which of the following is mentioned as a data center network challenge?", opts:["High cost","Poor server-to-server Connectivity","Complex configuration","Limited vendors"], ans:1, expl:"Poor server-to-server connectivity is listed as a data center network challenge.", ref:"Slide 14, Week 9 Lecture Material 4" },
+    { q:"Which protocol is mentioned as part of SDN components?", opts:["TCP","UDP","OpenFlow","HTTP"], ans:2, expl:"OpenFlow is explicitly mentioned as a protocol used in SDN.", ref:"Slide 4, Week 9 Lecture Material 5" },
+    { q:"GCAM is used to place flow-rules in SDN forwarding devices, but it is limited in capacity.", opts:["True","False"], ans:1, expl:"TCAM, not GCAM, is used for flow-rule placement and is limited in capacity.", ref:"Slide 6, Week 9 Lecture Material 5" },
+    { q:"Which advantage of SDIIoT enables events to be processed in order through deterministic forwarding?", opts:["Deterministic networking","High availability","Low-latency virtualization","Robust security"], ans:0, expl:"Deterministic networking enables ordered event processing through rule-based forwarding.", ref:"Slide 17, Week 9 Lecture Material 5" }
+  ]},
+  { title: "6TiSCH, Security & Smart Factories", questions: [
+    { q:"What is the primary objective of the IETF 6TiSCH protocol in IIoT?", opts:["To enable deterministic communication and efficient resource allocation","To increase non-deterministic communication","To replace SDN controllers entirely","To increase jitter in the network"], ans:0, expl:"6TiSCH enables deterministic communication and efficient resource allocation in constrained networks.", ref:"Slide 7, Week 10 Lecture Material 1" },
+    { q:"µSDN is integrated with which protocol stack?", opts:["Zigbee stack","IPv4 stack","Contiki IEEE 802.15.4-2015 stack","LTE stack"], ans:2, expl:"µSDN integrates with the Contiki IEEE 802.15.4-2015 protocol stack.", ref:"Slide 10, Week 10 Lecture Material 1" },
+    { q:"The public network in SDIIoT consists of switches, routers, and _____ network.", opts:["Sensor","Access","Control","Storage"], ans:1, expl:"The public network includes switches, routers, and access network.", ref:"Slide 4, Week 10 Lecture Material 1" },
+    { q:"Trustworthy IIoT includes security, privacy, safety, reliability, and resilience.", opts:["True","False"], ans:0, expl:"Trustworthy IIoT includes security, privacy, safety, reliability, and resilience.", ref:"Slide 4, Week 10 Lecture Material 2" },
+    { q:"Current security architectures are mostly _____ -centric.", opts:["OT","IT","Cloud","Device"], ans:1, expl:"Current IIoT security architectures are mostly IT-centric.", ref:"Slide 6, Week 10 Lecture Material 2" },
+    { q:"Which is the first step in IIoT security risk management?", opts:["Mitigating risks","Accepting risks","Avoiding risks","Outsourcing risks"], ans:2, expl:"Risk management begins with avoiding risks as the first step.", ref:"Slide 8, Week 10 Lecture Material 2" },
+    { q:"Security of whole IIoT system depends on deployed devices, communication security, data protection, and _____.", opts:["Network topology","Security management","Sensor calibration","Hardware redundancy"], ans:1, expl:"Security management is essential for ensuring overall IIoT system security.", ref:"Slide 2, Week 10 Lecture Material 3" },
+    { q:"End device protection requires physical security, access control, identity, and _____ protection.", opts:["Application","Network","Cloud","Data"], ans:3, expl:"End device protection includes data protection along with identity and access control.", ref:"Slide 6, Week 10 Lecture Material 3" },
+    { q:"What is the primary security requirement of IIoT systems?", opts:["Device scalability","End-to-end security","High bandwidth","Low latency"], ans:1, expl:"End-to-end security is the primary security requirement of IIoT systems.", ref:"Slide 2, Week 10 Lecture Material 3" },
+    { q:"Which feature of a smart factory enables prediction of future outcomes?", opts:["Transparent","Connected","Proactive","Agile"], ans:2, expl:"Proactive systems enable prediction of future outcomes for preventive actions.", ref:"Slide 5, Week 10 Lecture Material 4" },
+    { q:"Airbus uses which technology to visualize production processes in real time?", opts:["Augmented Reality","Blockchain visualization","Virtual reality only","3D real-time visualization"], ans:3, expl:"Airbus uses 3D real-time visualization to monitor production processes.", ref:"Slide 7, Week 10 Lecture Material 4" },
+    { q:"What technology does Amazon use to automate product search and retrieval in its warehouse?", opts:["Automated conveyor belts","Robotic shelves","Augmented Reality devices","Autonomous forklifts"], ans:1, expl:"Amazon uses robotic shelves to automate product search and retrieval.", ref:"Slide 11, Week 10 Lecture Material 4" },
+    { q:"What is the role of the sensing layer in IoT-enabled food supply chains?", opts:["Data encryption","Monitoring food quality using sensors","Providing cloud analytics","Managing business operations"], ans:1, expl:"The sensing layer monitors food quality using networked sensors.", ref:"Slide 2, Week 10 Lecture Material 5" },
+    { q:"What is one major benefit of supply chain transparency in the food industry?", opts:["Increased manual intervention","Reduced food wastage","Reduced sensor usage","Elimination of automation"], ans:1, expl:"Supply chain transparency helps reduce food wastage through real-time monitoring.", ref:"Slide 5, Week 10 Lecture Material 5" },
+    { q:"What does the 'Flavor Matrix' by Culinary Science Industries use to enhance dishes?", opts:["Robot chefs","Augmented Reality menus","3D printed food","Machine learning and data analysis of food ingredients"], ans:3, expl:"Flavor Matrix uses machine learning and data analysis to enhance food flavor combinations.", ref:"Slide 19, Week 10 Lecture Material 5" }
+  ]},
+  { title: "Healthcare, Energy & Inventory", questions: [
+    { q:"In IIoT Healthcare Architecture, which process immediately follows 'Sensing'?", opts:["Learning","Storing","Sending","Processing"], ans:2, expl:"The IIoT Healthcare Architecture flow is Sensing → Sending → Processing → Storing → Learning.", ref:"Slide 7, Week 11 Lecture Material 1" },
+    { q:"Asthma is a lifelong disease that can be completely cured using IIoT-based smart inhalers.", opts:["True","False"], ans:1, expl:"Asthma is a lifelong disease that can be controlled but not cured.", ref:"Slide 15, Week 11 Lecture Material 1" },
+    { q:"Which is an example of a wireless ECG monitoring device?", opts:["iHealth BP5","Dexcom","QardioCore","Kinsa smart thermometer"], ans:2, expl:"QardioCore is presented as a wireless ECG monitoring device.", ref:"Slide 9, Week 11 Lecture Material 1" },
+    { q:"In AMI, Broadband over PowerLine and Fixed radio frequency are used for communication networks.", opts:["True","False"], ans:0, expl:"AMI communication networks use Broadband over PowerLine and Fixed radio frequency.", ref:"Slide 13, Week 11 Lecture Material 2" },
+    { q:"Which specific issue can IoT predict in the water sector besides tracking water pressure and quality?", opts:["Water freezing points","Exact rainwater volume","Water leakage","New underground water sources"], ans:2, expl:"IoT systems can predict water leakage along with monitoring pressure and quality.", ref:"Slide 15, Week 11 Lecture Material 2" },
+    { q:"How does a digital power plant reduce costs?", opts:["By increasing manpower","By increasing fuel consumption","By using manual monitoring","By utilizing automated devices reducing manpower and maintenance"], ans:3, expl:"Digital power plants reduce costs through automation that lowers manpower and maintenance needs.", ref:"Slide 4, Week 11 Lecture Material 2" },
+    { q:"Which type of RFID tag relies on backscattering and has no internal power source?", opts:["Active RFID","Passive RFID","Battery-Assisted Passive RFID","Hybrid RFID"], ans:1, expl:"Passive RFID tags rely on backscattering and do not contain an internal power source.", ref:"Slide 10, Week 11 Lecture Material 3" },
+    { q:"Which is considered a primary Function of Inventory Management?", opts:["Increasing data scattering","Decoupling components of the production-distribution system","Broadcasting information signals","Creating additional noise"], ans:1, expl:"Inventory management decouples components of the production-distribution system.", ref:"Slide 5, Week 11 Lecture Material 3" },
+    { q:"Quality Control is defined as a system of routine technical activities to measure and control quality as it is being _____.", opts:["Developed","Transported to retail","Sold to the customer","Disposed of"], ans:0, expl:"Quality control measures and controls the quality of inventory as it is being developed.", ref:"Slide 7, Week 11 Lecture Material 3" },
+    { q:"The Intrusion Triangle consists of Opportunity, Means, and _____.", opts:["Integrity","Motive","Availability","Authentication"], ans:1, expl:"The Intrusion Triangle includes Motive, Opportunity, and Means.", ref:"Slide 2, Week 11 Lecture Material 4" },
+    { q:"Which Software Security concept is responsible for verification of credentials entered locally or remotely?", opts:["Integrity","Authentication","Availability","Network segmentation"], ans:1, expl:"Authentication verifies credentials entered locally or remotely.", ref:"Slide 8, Week 11 Lecture Material 4" },
+    { q:"Which type of Network Security specifically scans for malware detection and prevention?", opts:["Access control","Application security","Behavioral analytics","Antivirus/antimalware software"], ans:3, expl:"Antivirus and antimalware software scans systems to detect and prevent malware.", ref:"Slide 12, Week 11 Lecture Material 4" },
+    { q:"According to the Facilities Management Good Practice Guide, what does FM manage on behalf of property owners?", opts:["Factory assembly lines","Buildings, precincts, community infrastructure","Cloud computing servers","Retail supply chains"], ans:1, expl:"Facility Management manages buildings, precincts, and community infrastructure.", ref:"Slide 2, Week 11 Lecture Material 5" },
+    { q:"In IoT in Facility Management, implementing new technology includes Light Fidelity (Li-Fi) and data security.", opts:["True","False"], ans:0, expl:"Implementing new technologies such as Li-Fi and data security is included in IoT-based facility management.", ref:"Slide 6, Week 11 Lecture Material 5" },
+    { q:"Which support service focuses on researching potential customers?", opts:["Administrative Support","Marketing","Business Development","Information Technology"], ans:1, expl:"Marketing focuses on researching potential customers.", ref:"Slide 8, Week 11 Lecture Material 5" }
+  ]},
+  { title: "Industry Applications & UAVs", questions: [
+    { q:"In the Oil & Gas Industry Work-flow, which step immediately precedes data moving to cloud-based analytics?", opts:["Deploy IoT solutions","Apply predictive analytics","Data analysis by ETL","Identify required maintenance"], ans:2, expl:"Data analysis using ETL occurs just before data is moved to the cloud platform.", ref:"Slide 5, Week 12 Lecture Material 1" },
+    { q:"In ML and Cloud Services workflow, identifying specific data types occurs after analyzing and evaluating data.", opts:["True","False"], ans:0, expl:"Identification of specific data types follows analysis and evaluation of data.", ref:"Slide 6, Week 12 Lecture Material 1" },
+    { q:"In the Chemical Industry, what is a primary goal of Predictive Maintenance?", opts:["Address real time issues","Track vehicle locations","Increase energy usage","Optimize medicine routing"], ans:0, expl:"Predictive maintenance focuses on addressing real-time issues and reducing breakdowns.", ref:"Slide 12, Week 12 Lecture Material 1" },
+    { q:"Which action is part of 'Improve Logistics' in the Chemical Industry?", opts:["Analyzing water and nutrients","Detection of contamination or attacks","Pricing model with profit margin","Reducing equipment breakdown"], ans:1, expl:"Improve logistics includes detection of contamination or attacks.", ref:"Slide 14, Week 12 Lecture Material 1" },
+    { q:"IoT in Pharmaceutical Industry connects manufacturing, monitoring, controlling, and _____ technologies.", opts:["Distribution","Farming","Extraction","Refining"], ans:0, expl:"Pharmaceutical IoT systems integrate manufacturing, monitoring, controlling, and distribution.", ref:"Slide 20, Week 12 Lecture Material 1" },
+    { q:"How do UAVs typically communicate with industrial systems?", opts:["Through handwritten notes","Through SCADA systems","Via wired connections only","They do not communicate with industrial systems"], ans:1, expl:"UAVs communicate directly with industrial control systems such as SCADA.", ref:"Slide 3, Week 12 Lecture Material 2" },
+    { q:"The _____ generation of UAV technology features transformable designs with 360° gimbals.", opts:["Third","Fourth","Fifth","Sixth"], ans:2, expl:"Fifth generation UAVs include transformable designs and advanced features like 360° gimbals.", ref:"Slide 4, Week 12 Lecture Material 2" },
+    { q:"Which is an application of UAVs in Energy Management?", opts:["Resisting deforestation","Inspecting large boiler at power plants","Delivery of defibrillators","Broadcasting live events"], ans:1, expl:"UAVs are used to inspect large boilers and other infrastructure in energy systems.", ref:"Slide 10, Week 12 Lecture Material 2" },
+    { q:"In the mining industry, regular surface surveys by UAVs are primarily used for:", opts:["Watershed analysis","Canopy mapping","Finding missing items","Optimized blast design"], ans:3, expl:"UAV surface surveys support optimized blast design in mining operations.", ref:"Slide 11, Week 12 Lecture Material 2" },
+    { q:"In the Healthcare sector, research is being done on drones with _____ that can help the senior population.", opts:["Manipulator arms","Defibrillators","Thermal imagery","360° gimbals"], ans:0, expl:"Drones with manipulator arms are being researched to assist the elderly.", ref:"Slide 12, Week 12 Lecture Material 2" },
+    { q:"How do UAVs specifically assist in testing networks within the Telecommunication sector?", opts:["By broadcasting live events","By providing internet to urban areas","By monitoring construction sites","By testing network coverage and stability"], ans:3, expl:"UAVs are used to test network coverage and stability in telecom systems.", ref:"Slide 13, Week 12 Lecture Material 2" },
+    { q:"A case study enables a researcher to closely examine the data within a _____.", opts:["Broad universal scope","Specific context","Simulated testing environment","Purely hypothetical scenario"], ans:1, expl:"Case studies analyze data within a specific real-world context.", ref:"Slide 2, Week 12 Lecture Material 3" },
+    { q:"Case studies are limited to providing only qualitative analysis of the data.", opts:["True","False"], ans:1, expl:"Case studies provide both qualitative and quantitative analysis.", ref:"Slide 2, Week 12 Lecture Material 3" },
+    { q:"A key point to ponder for all case studies is the reduction of _____ of workers.", opts:["Mandatory work hours","Annual paid leaves","Technical training costs","Health hazards"], ans:3, expl:"Reducing health hazards of workers is a key consideration in case studies.", ref:"Slide 6, Week 12 Lecture Material 3" },
+    { q:"What do case studies explore and investigate through detailed analysis?", opts:["Real-life phenomenon","Purely fictional events","Ancient historical myths","Unknown future predictions"], ans:0, expl:"Case studies investigate real-life phenomena through detailed analysis.", ref:"Slide 3, Week 12 Lecture Material 3" }
+  ]}
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────
+const FLAT = [];
+ASSIGNMENTS.forEach((a, ai) => a.questions.forEach((q) => FLAT.push({...q, asgnIdx: ai})));
+
+let state = {
+  mode: null,
+  questions: [],
+  current: 0,
+  correct: 0,
+  wrong: 0,
+  wrongIndices: [],
+  answered: false,
+  assignmentIdx: null,
+  sessionPerAssignment: {},
+  perAssignment: {},
+  bestScore: null,
+};
+
+function loadStorage() {
+  try {
+    const s = JSON.parse(localStorage.getItem('iiot_v2') || '{}');
+    if (s.wrongIndices) state.wrongIndices = s.wrongIndices;
+    if (s.bestScore !== undefined) state.bestScore = s.bestScore;
+    if (s.perAssignment) state.perAssignment = s.perAssignment;
+  } catch(e){}
+}
+
+function saveStorage() {
+  try {
+    localStorage.setItem('iiot_v2', JSON.stringify({
+      wrongIndices: state.wrongIndices,
+      bestScore: state.bestScore,
+      perAssignment: state.perAssignment
+    }));
+  } catch(e){}
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────────
+function goHome() {
+  setScreen('home-screen');
+  setActiveNav('home');
+  renderHome();
+}
+function goNotes() {
+  setScreen('notes-screen');
+  setActiveNav('notes');
+  renderNotesScreen();
+}
+function setActiveNav(tab) {
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active-tab'));
+  if(tab === 'home') document.querySelectorAll('.nav-link')[0].classList.add('active-tab');
+  if(tab === 'notes') document.getElementById('notes-nav-btn').classList.add('active-tab');
+}
+
+// ─── HOME ─────────────────────────────────────────────────────────────
+function renderHome() {
+  document.getElementById('best-score-display').textContent = state.bestScore !== null ? state.bestScore+'%' : '—';
+  document.getElementById('wrong-bank-display').textContent = state.wrongIndices.length;
+
+  const grid = document.getElementById('assignment-grid');
+  grid.innerHTML = '';
+  ASSIGNMENTS.forEach((a, i) => {
+    const data = state.perAssignment[i] || {correct:0, total:0};
+    const pct = data.total > 0 ? Math.round(data.correct/data.total*100) : 0;
+    const div = document.createElement('div');
+    div.className = 'asgn-card';
+    div.onclick = () => startAssignment(i);
+    div.innerHTML = `
+      <div class="asgn-num">ASSIGNMENT ${String(i+1).padStart(2,'0')}</div>
+      <div class="asgn-title">${a.title}</div>
+      <div class="asgn-score">${data.total>0?`${data.correct}/${data.total} · ${pct}%`:'15 questions'}</div>
+      <div class="asgn-bar"><div class="asgn-bar-fill" style="width:${pct}%"></div></div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// ─── QUIZ ─────────────────────────────────────────────────────────────
+function startMockTest() {
+  state.mode = 'mock';
+  state.questions = shuffle(FLAT);
+  state.current = 0; state.correct = 0; state.wrong = 0;
+  state.answered = false; state.sessionPerAssignment = {};
+  document.getElementById('quiz-mode-label').textContent = 'Mock Test';
+  document.getElementById('quiz-sub-label').textContent = '180 questions · shuffled';
+  document.getElementById('practice-banner').style.display = 'none';
+  setScreen('quiz-screen');
+  renderQuestion();
+}
+
+function startAssignment(idx) {
+  state.mode = 'assignment';
+  state.assignmentIdx = idx;
+  state.questions = [...ASSIGNMENTS[idx].questions];
+  state.current = 0; state.correct = 0; state.wrong = 0;
+  state.answered = false; state.sessionPerAssignment = {};
+  document.getElementById('quiz-mode-label').textContent = `Assignment ${idx+1}`;
+  document.getElementById('quiz-sub-label').textContent = ASSIGNMENTS[idx].title;
+  document.getElementById('practice-banner').style.display = 'none';
+  setScreen('quiz-screen');
+  renderQuestion();
+}
+
+function startPractice() {
+  if(state.wrongIndices.length === 0){ showToast('No wrong answers yet! Take a quiz first.'); return; }
+  state.mode = 'practice';
+  state.questions = shuffle(state.wrongIndices).map(i => FLAT[i]);
+  state.current = 0; state.correct = 0; state.wrong = 0;
+  state.answered = false; state.sessionPerAssignment = {};
+  document.getElementById('quiz-mode-label').textContent = 'Practice Mode';
+  document.getElementById('quiz-sub-label').textContent = 'Reviewing your wrong answers';
+  document.getElementById('practice-banner').style.display = 'flex';
+  document.getElementById('wrong-count-label').textContent = state.wrongIndices.length;
+  setScreen('quiz-screen');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = state.questions[state.current];
+  const total = state.questions.length;
+  const pct = Math.round((state.current/total)*100);
+  document.getElementById('q-counter').textContent = `Q ${state.current+1} / ${total}`;
+  document.getElementById('q-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('live-correct').textContent = state.correct;
+  document.getElementById('live-wrong').textContent = state.wrong;
+  document.getElementById('next-btn').style.display = 'none';
+
+  const ai = q.asgnIdx !== undefined ? q.asgnIdx : state.assignmentIdx;
+  document.getElementById('q-tag').textContent = `A${String((ai||0)+1).padStart(2,'0')} · Q${state.current+1}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('explanation-area').innerHTML = '';
+
+  const labels = ['A','B','C','D'];
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="opt-key">${labels[i]}</span><span>${opt}</span>`;
+    btn.onclick = () => answer(i);
+    grid.appendChild(btn);
+  });
+  state.answered = false;
+}
+
+function answer(idx) {
+  if(state.answered) return;
+  state.answered = true;
+  const q = state.questions[state.current];
+  const btns = document.querySelectorAll('.option-btn');
+  const correct = idx === q.ans;
+
+  btns.forEach((btn, i) => {
+    btn.classList.add('answered');
+    if(i === q.ans) btn.classList.add('correct');
+    else if(i === idx && !correct) btn.classList.add('wrong');
+    else btn.classList.add('dim');
+  });
+
+  const flatIdx = FLAT.findIndex(f => f.q === q.q);
+  if(correct) {
+    state.correct++;
+    state.wrongIndices = state.wrongIndices.filter(i => i !== flatIdx);
+  } else {
+    state.wrong++;
+    if(flatIdx !== -1 && !state.wrongIndices.includes(flatIdx)) state.wrongIndices.push(flatIdx);
+  }
+
+  const ai = q.asgnIdx !== undefined ? q.asgnIdx : state.assignmentIdx;
+  if(ai !== undefined && ai !== null) {
+    if(!state.sessionPerAssignment[ai]) state.sessionPerAssignment[ai] = {correct:0, total:0};
+    state.sessionPerAssignment[ai].total++;
+    if(correct) state.sessionPerAssignment[ai].correct++;
+  }
+
+  document.getElementById('explanation-area').innerHTML = `
+    <div class="explanation-box">
+      <div class="expl-head">
+        <span>${correct ? '✓ Correct!' : `✗ Wrong — Answer: ${['A','B','C','D'][q.ans]}) ${q.opts[q.ans]}`}</span>
+      </div>
+      <div class="expl-body">
+        ${q.expl}
+        ${q.ref ? `<div class="expl-ref">📖 ${q.ref}</div>` : ''}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('live-correct').textContent = state.correct;
+  document.getElementById('live-wrong').textContent = state.wrong;
+  const nb = document.getElementById('next-btn');
+  nb.style.display = 'inline-flex';
+  nb.textContent = state.current + 1 < state.questions.length ? 'Next →' : 'Finish ✓';
+}
+
+function nextQuestion() {
+  state.current++;
+  if(state.current >= state.questions.length) finishQuiz();
+  else renderQuestion();
+}
+
+function quitQuiz() {
+  if(confirm('Quit the quiz? Your progress will be saved.')) {
+    saveStorage();
+    goHome();
+  }
+}
+
+function finishQuiz() {
+  Object.entries(state.sessionPerAssignment).forEach(([ai, data]) => {
+    state.perAssignment[ai] = data;
+  });
+  const total = state.questions.length;
+  const pct = Math.round(state.correct/total*100);
+  if(state.mode === 'mock') {
+    if(state.bestScore === null || pct > state.bestScore) state.bestScore = pct;
+  }
+  saveStorage();
+  setScreen('result-screen');
+
+  const circ = 2*Math.PI*70;
+  const offset = circ - (pct/100)*circ;
+  const ring = document.getElementById('ring-fill');
+  ring.style.strokeDasharray = circ;
+  ring.style.strokeDashoffset = circ;
+  setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+  document.getElementById('ring-pct').textContent = pct + '%';
+
+  const title = pct>=80?'🎉 Excellent!':pct>=60?'👍 Good Job!':'💪 Keep Going!';
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-subtitle').textContent = `${state.correct} of ${total} correct. ${state.wrongIndices.length} question(s) in your practice bank.`;
+
+  const tbody = document.getElementById('breakdown-body');
+  tbody.innerHTML = '';
+  if(state.mode === 'assignment') {
+    const ai = state.assignmentIdx;
+    const p = Math.round(state.correct/total*100);
+    const cls = p>=80?'pct-green':p>=50?'pct-yellow':'pct-red';
+    const fill = p>=80?'#22c55e':p>=50?'#f59e0b':'#ef4444';
+    tbody.innerHTML = `<tr>
+      <td>${ASSIGNMENTS[ai].title}</td>
+      <td style="font-family:var(--mono)">${state.correct}/${total}</td>
+      <td><span class="pct-pill ${cls}">${p}%</span></td>
+      <td><span class="mini-bar"><span class="mini-fill" style="width:${p}%;background:${fill}"></span></span></td>
+    </tr>`;
+  } else {
+    ASSIGNMENTS.forEach((a,i) => {
+      const d = state.sessionPerAssignment[i];
+      if(!d) return;
+      const p = Math.round(d.correct/d.total*100);
+      const cls = p>=80?'pct-green':p>=50?'pct-yellow':'pct-red';
+      const fill = p>=80?'#22c55e':p>=50?'#f59e0b':'#ef4444';
+      tbody.innerHTML += `<tr>
+        <td><span style="font-family:var(--mono);font-size:10px;color:var(--muted)">A${String(i+1).padStart(2,'0')}</span> ${a.title}</td>
+        <td style="font-family:var(--mono);font-size:12px">${d.correct}/${d.total}</td>
+        <td><span class="pct-pill ${cls}">${p}%</span></td>
+        <td><span class="mini-bar"><span class="mini-fill" style="width:${p}%;background:${fill}"></span></span></td>
+      </tr>`;
+    });
+  }
+
+  const acts = document.getElementById('result-actions');
+  acts.innerHTML = '';
+  if(state.wrongIndices.length > 0) {
+    const pb = document.createElement('button');
+    pb.className = 'btn btn-primary';
+    pb.textContent = `🔁 Practice ${state.wrongIndices.length} Mistakes`;
+    pb.onclick = startPractice;
+    acts.appendChild(pb);
+  }
+  const hb = document.createElement('button');
+  hb.className = 'btn btn-secondary';
+  hb.textContent = '← Home';
+  hb.onclick = goHome;
+  acts.appendChild(hb);
+  const rb = document.createElement('button');
+  rb.className = 'btn btn-secondary';
+  rb.textContent = '↺ Retry';
+  rb.onclick = () => {
+    if(state.mode==='mock') startMockTest();
+    else if(state.mode==='assignment') startAssignment(state.assignmentIdx);
+    else startPractice();
+  };
+  acts.appendChild(rb);
+}
+
+// ─── NOTES ───────────────────────────────────────────────────────────
+let currentNoteKey = null;
+
+function renderNotesScreen() {
+  const grid = document.getElementById('weeks-grid');
+  grid.innerHTML = '';
+
+  for(let w=1; w<=12; w++) {
+    const card = document.createElement('div');
+    card.className = 'week-card';
+    card.id = `week-card-${w}`;
+
+    const header = document.createElement('div');
+    header.className = 'week-header';
+    header.onclick = () => toggleWeek(w);
+    header.innerHTML = `
+      <div class="week-header-left">
+        <span class="week-badge">WEEK ${String(w).padStart(2,'0')}</span>
+        <span class="week-name">${WEEK_TITLES[w-1]}</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    `;
+
+    const lecList = document.createElement('div');
+    lecList.className = 'lectures-list';
+
+    for(let l=1; l<=5; l++) {
+      const key = `W${w}_L${l}`;
+      const hasContent = NOTES_DATA[key] && NOTES_DATA[key].trim() !== '';
+
+      const btn = document.createElement('button');
+      btn.className = 'lec-btn' + (hasContent ? ' has-content' : '');
+      btn.onclick = () => openNote(w, l, key);
+      btn.innerHTML = `
+        <div class="lec-left">
+          <span class="lec-num">LEC ${l}</span>
+          <span class="lec-title">Lecture ${l}</span>
+        </div>
+        <span class="lec-status">${hasContent ? '📄' : '○'}</span>
+      `;
+      lecList.appendChild(btn);
+    }
+
+    card.appendChild(header);
+    card.appendChild(lecList);
+    grid.appendChild(card);
+  }
+}
+
+function toggleWeek(w) {
+  const card = document.getElementById(`week-card-${w}`);
+  card.classList.toggle('open');
+}
+
+function openNote(week, lec, key) {
+  currentNoteKey = key;
+  const panel = document.getElementById('notes-panel');
+  const title = document.getElementById('notes-panel-title');
+  const sub = document.getElementById('notes-panel-sub');
+  const content = document.getElementById('notes-content-area');
+
+  title.textContent = `Week ${week} — Lecture ${lec}`;
+  sub.textContent = WEEK_TITLES[week-1];
+
+  const notes = NOTES_DATA[key];
+  if(notes && notes.trim() !== '') {
+    content.innerHTML = `<div style="white-space:pre-wrap;line-height:1.85;color:var(--text2);font-size:14px">${escapeHtml(notes)}</div>`;
+  } else {
+    content.innerHTML = `
+      <div class="notes-empty">
+        <div class="notes-empty-icon">📝</div>
+        <span>No notes yet for Week ${week}, Lecture ${lec}</span>
+        <span style="font-size:11px;margin-top:6px;text-align:center;max-width:300px">
+          Open the HTML file and find <strong style="color:var(--amber)">NOTES_DATA</strong>.<br/>
+          Set the value for <strong style="color:var(--amber)">"${key}"</strong> to add your summary.
+        </span>
+      </div>
+    `;
+  }
+
+  panel.classList.add('visible');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeNotesPanel() {
+  document.getElementById('notes-panel').classList.remove('visible');
+  currentNoteKey = null;
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ─── UTILS ───────────────────────────────────────────────────────────
+function setScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────
+loadStorage();
+renderHome();
+</script>
+</body>
+</html>
