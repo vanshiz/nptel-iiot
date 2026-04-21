@@ -4,62 +4,54 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>IIoT & Industry 4.0 — Quiz Prep</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg: #0e0e10;
-  --bg2: #141416;
-  --bg3: #1a1a1e;
-  --card: #1e1e24;
-  --card2: #252530;
-  --border: #2e2e3a;
-  --border2: #3a3a4a;
+  --cream: #f5f0e8;
+  --cream2: #ede7d9;
+  --cream3: #e4dccb;
+  --parchment: #d9d0bd;
+  --ink: #2a1f0e;
+  --ink2: #3d2f18;
+  --ink3: #5a4630;
+  --brown: #7a5c3a;
+  --brown-light: #a07850;
+  --gold: #9a7040;
+  --gold-light: #c49a58;
+  --rust: #8b3a2a;
+  --sage: #4a6650;
+  --border: #c8baa0;
+  --border2: #b5a485;
+  --shadow: rgba(42,31,14,0.12);
+  --shadow2: rgba(42,31,14,0.06);
 
-  --text: #f0f0f5;
-  --text2: #a0a0b8;
-  --muted: #606075;
-
-  --amber: #f5a623;
-  --amber-dim: rgba(245,166,35,0.12);
-  --amber-glow: rgba(245,166,35,0.25);
-
-  --teal: #00d4aa;
-  --teal-dim: rgba(0,212,170,0.1);
-
-  --rose: #ff4f6d;
-  --rose-dim: rgba(255,79,109,0.1);
-
-  --green: #22c55e;
-  --green-dim: rgba(34,197,94,0.12);
-  --red: #ef4444;
-  --red-dim: rgba(239,68,68,0.1);
-  --yellow: #f59e0b;
-
-  --mono: 'JetBrains Mono', monospace;
-  --display: 'Syne', sans-serif;
-  --sans: 'Outfit', sans-serif;
-  --radius: 14px;
+  --display: 'Playfair Display', Georgia, serif;
+  --body: 'EB Garamond', 'Garamond', Georgia, serif;
+  --serif2: 'Libre Baskerville', Georgia, serif;
+  --radius: 4px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: 17px;
+  line-height: 1.6;
 }
 
-/* Grid texture */
+/* Subtle grid texture */
 body::before {
   content:'';
   position:fixed;
   inset:0;
   background-image:
-    linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
-  background-size:50px 50px;
+    linear-gradient(rgba(42,31,14,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42,31,14,0.025) 1px, transparent 1px);
+  background-size:60px 60px;
   pointer-events:none;
   z-index:0;
 }
@@ -75,10 +67,10 @@ body::before {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:16px 28px;
+  padding:14px 36px;
   border-bottom:1px solid var(--border);
-  background: rgba(14,14,16,0.8);
-  backdrop-filter: blur(20px);
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
   position:sticky;
   top:0;
   z-index:100;
@@ -86,111 +78,178 @@ body::before {
 .nav-brand {
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
   font-family: var(--display);
-  font-weight:700;
+  font-weight:600;
   font-size:15px;
-  color:var(--text);
+  color:var(--ink);
+  letter-spacing:0.01em;
 }
-.nav-dot {
-  width:8px;height:8px;
-  border-radius:50%;
-  background:var(--amber);
-  box-shadow:0 0 8px var(--amber);
-  animation:pulse 2s infinite;
+.nav-ornament {
+  width:20px;height:20px;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
 }
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(0.8)}}
+.nav-ornament::before {
+  content:'✦';
+  font-size:14px;
+  color:var(--gold);
+  animation:spin-slow 8s linear infinite;
+}
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-.nav-links{display:flex;gap:6px}
+.nav-eyebrow {
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav-links{display:flex;gap:4px}
 .nav-link {
   background:transparent;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:7px 14px;
-  font-family:var(--sans);
-  font-size:13px;
-  font-weight:500;
-  color:var(--text2);
+  border:1px solid transparent;
+  border-radius:var(--radius);
+  padding:6px 16px;
+  font-family:var(--body);
+  font-size:14px;
+  font-style: italic;
+  color:var(--ink3);
   cursor:pointer;
   transition:all .2s;
+  letter-spacing:0.02em;
 }
 .nav-link:hover,.nav-link.active-tab{
-  border-color:var(--amber);
-  color:var(--amber);
-  background:var(--amber-dim);
+  border-color:var(--border2);
+  color:var(--gold);
+  background: rgba(154,112,64,0.06);
 }
 
 /* ── HOME ── */
 #home-screen {
-  max-width:900px;
+  max-width:880px;
   margin:0 auto;
-  padding:48px 24px;
+  padding:56px 28px;
   display:none;
   flex-direction:column;
   align-items:center;
-  gap:40px;
+  gap:44px;
 }
 #home-screen.active{display:flex}
 
 .hero-eyebrow {
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.15em;
+  font-family:var(--body);
+  font-style:italic;
+  font-size:13px;
+  letter-spacing:.18em;
   text-transform:uppercase;
-  color:var(--amber);
-  background:var(--amber-dim);
-  border:1px solid rgba(245,166,35,0.2);
-  padding:6px 16px;
-  border-radius:100px;
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
+.hero-eyebrow::before,.hero-eyebrow::after {
+  content:'';
+  display:inline-block;
+  width:40px;height:1px;
+  background:var(--gold-light);
+}
+
+.hero-block{text-align:center}
 
 h1 {
   font-family:var(--display);
-  font-size:clamp(32px,6vw,56px);
+  font-size:clamp(38px,7vw,68px);
   font-weight:800;
   text-align:center;
-  line-height:1.1;
-  color:var(--text);
+  line-height:1.08;
+  color:var(--ink);
   letter-spacing:-.02em;
+  margin-bottom:6px;
 }
-h1 span {color:var(--amber)}
+h1 em {
+  font-style:italic;
+  color:var(--gold);
+}
+
+.hero-sub-line {
+  font-family:var(--body);
+  font-style:italic;
+  font-size:15px;
+  color:var(--gold);
+  text-align:center;
+  letter-spacing:0.08em;
+  margin-top:4px;
+}
 
 .subtitle {
-  color:var(--text2);
+  color:var(--ink3);
   text-align:center;
   max-width:480px;
-  line-height:1.8;
-  font-size:15px;
+  line-height:1.85;
+  font-size:16px;
+  font-family:var(--body);
+  margin-top:12px;
+}
+
+/* Ornamental divider */
+.ornament-divider {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  color:var(--gold-light);
+  font-size:18px;
+  width:100%;
+  justify-content:center;
+  opacity:0.6;
+}
+.ornament-divider::before,.ornament-divider::after {
+  content:'';
+  flex:1;
+  max-width:160px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--border2));
+}
+.ornament-divider::after {
+  background:linear-gradient(90deg, var(--border2), transparent);
 }
 
 .stats-row {
   display:flex;
-  gap:14px;
+  gap:2px;
   flex-wrap:wrap;
   justify-content:center;
-}
-.stat-chip {
-  background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:20px 28px;
-  text-align:center;
-  min-width:120px;
-  transition:border-color .2s;
+  overflow:hidden;
+  background:var(--cream2);
 }
-.stat-chip:hover{border-color:var(--border2)}
+.stat-chip {
+  padding:22px 36px;
+  text-align:center;
+  min-width:130px;
+  border-right:1px solid var(--border);
+  transition:background .2s;
+  position:relative;
+}
+.stat-chip:last-child{border-right:none}
+.stat-chip:hover{background:var(--cream3)}
 .stat-chip .num {
   font-family:var(--display);
-  font-size:30px;
-  font-weight:800;
-  color:var(--amber);
+  font-size:34px;
+  font-weight:700;
+  color:var(--ink);
+  line-height:1;
 }
 .stat-chip .lbl {
-  font-size:12px;
-  color:var(--muted);
-  margin-top:4px;
-  font-family:var(--mono);
-  letter-spacing:.05em;
+  font-size:11px;
+  color:var(--brown);
+  margin-top:5px;
+  font-family:var(--body);
+  font-style:italic;
+  letter-spacing:.06em;
 }
 
 .action-row {
@@ -201,52 +260,55 @@ h1 span {color:var(--amber)}
 }
 
 .btn {
-  font-family:var(--sans);
+  font-family:var(--body);
   font-weight:600;
-  font-size:14px;
+  font-size:15px;
   border:none;
   border-radius:var(--radius);
   cursor:pointer;
-  padding:13px 28px;
+  padding:12px 28px;
   transition:all .2s;
   display:inline-flex;
   align-items:center;
   gap:8px;
   white-space:nowrap;
+  letter-spacing:0.03em;
 }
 .btn-primary {
-  background:var(--amber);
-  color:#0e0e10;
-  box-shadow:0 4px 20px var(--amber-glow);
+  background:var(--ink);
+  color:var(--cream);
+  border:1px solid var(--ink);
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--amber-glow)}
+.btn-primary:hover{background:var(--ink2);transform:translateY(-1px);box-shadow:0 4px 16px var(--shadow)}
 .btn-secondary {
-  background:var(--card);
-  color:var(--text);
-  border:1px solid var(--border);
+  background:transparent;
+  color:var(--ink3);
+  border:1px solid var(--border2);
 }
-.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
+.btn-secondary:hover{border-color:var(--ink3);color:var(--ink);background:var(--cream2)}
 .btn-teal {
-  background:var(--teal-dim);
-  color:var(--teal);
-  border:1px solid rgba(0,212,170,0.25);
+  background:transparent;
+  color:var(--sage);
+  border:1px solid rgba(74,102,80,0.35);
 }
-.btn-teal:hover{background:rgba(0,212,170,0.18);transform:translateY(-1px)}
-.btn-sm{padding:8px 16px;font-size:12px;border-radius:8px}
+.btn-teal:hover{background:rgba(74,102,80,0.08);transform:translateY(-1px)}
+.btn-sm{padding:7px 14px;font-size:13px;border-radius:var(--radius)}
 
 .section-header {
   width:100%;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:14px;
 }
 .section-label {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--muted);
+  font-family:var(--body);
+  font-size:12px;
+  color:var(--brown);
+  font-style:italic;
+  letter-spacing:.12em;
   text-transform:uppercase;
-  letter-spacing:.15em;
+  white-space:nowrap;
 }
 .section-line {
   flex:1;
@@ -256,61 +318,56 @@ h1 span {color:var(--amber)}
 
 .assignment-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(190px,1fr));
-  gap:10px;
+  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  gap:1px;
   width:100%;
-}
-.asgn-card {
-  background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:18px;
-  cursor:pointer;
-  transition:all .25s;
-  position:relative;
   overflow:hidden;
+  background:var(--border);
 }
-.asgn-card::after {
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:2px;
-  background:linear-gradient(90deg,var(--amber),transparent);
-  opacity:0;
-  transition:opacity .2s;
+.asgn-card {
+  background:var(--cream);
+  padding:18px 20px;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
 }
-.asgn-card:hover{border-color:var(--border2);transform:translateY(-2px);background:var(--card2)}
-.asgn-card:hover::after{opacity:1}
+.asgn-card:hover{background:var(--cream2)}
 .asgn-num {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--amber);
+  font-family:var(--body);
+  font-style:italic;
+  font-size:11px;
+  color:var(--gold);
   letter-spacing:.1em;
+  text-transform:uppercase;
 }
 .asgn-title {
-  font-size:12px;
+  font-family:var(--display);
+  font-size:13px;
   font-weight:600;
-  margin-top:6px;
-  color:var(--text);
+  margin-top:5px;
+  color:var(--ink);
   line-height:1.4;
 }
 .asgn-score {
-  margin-top:8px;
-  font-size:11px;
-  color:var(--muted);
-  font-family:var(--mono);
+  margin-top:7px;
+  font-size:12px;
+  color:var(--brown);
+  font-family:var(--body);
+  font-style:italic;
 }
-.asgn-bar{height:2px;background:var(--border);border-radius:1px;margin-top:10px}
-.asgn-bar-fill{height:100%;border-radius:1px;background:var(--amber);transition:width .4s}
+.asgn-bar{height:1px;background:var(--parchment);margin-top:10px}
+.asgn-bar-fill{height:100%;background:var(--gold);transition:width .4s}
 
 /* ── QUIZ ── */
 #quiz-screen {
-  max-width:820px;
+  max-width:800px;
   margin:0 auto;
-  padding:24px 20px;
+  padding:28px 24px;
   display:none;
   flex-direction:column;
-  gap:18px;
+  gap:20px;
 }
 #quiz-screen.active{display:flex}
 
@@ -319,178 +376,203 @@ h1 span {color:var(--amber)}
   align-items:center;
   justify-content:space-between;
   flex-wrap:wrap;
-  gap:12px;
-  background:var(--card);
+  gap:14px;
+  background:var(--cream2);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:16px 20px;
+  padding:16px 22px;
 }
 .quiz-title-block .quiz-mode-label{
   font-family:var(--display);
-  font-size:16px;
+  font-size:18px;
   font-weight:700;
+  color:var(--ink);
 }
 .quiz-title-block .quiz-sub{
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--muted);
+  font-family:var(--body);
+  font-style:italic;
+  font-size:12px;
+  color:var(--brown);
   margin-top:2px;
+  letter-spacing:.04em;
 }
 .quiz-progress-col{flex:1;min-width:200px}
 .progress-meta {
   display:flex;
   justify-content:space-between;
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--muted);
-  margin-bottom:6px;
+  font-family:var(--body);
+  font-style:italic;
+  font-size:12px;
+  color:var(--brown);
+  margin-bottom:7px;
+  letter-spacing:.04em;
 }
 .progress-track{
-  height:3px;
-  background:var(--border);
-  border-radius:2px;
+  height:2px;
+  background:var(--parchment);
+  border-radius:1px;
 }
 .progress-fill{
   height:100%;
-  background:var(--amber);
-  border-radius:2px;
+  background:var(--gold);
+  border-radius:1px;
   transition:width .4s ease;
-  box-shadow:0 0 8px var(--amber-glow);
 }
 
 .practice-banner {
-  background:rgba(0,212,170,0.08);
-  border:1px solid rgba(0,212,170,0.2);
-  border-radius:10px;
-  padding:10px 16px;
-  font-size:13px;
-  color:var(--teal);
+  background:rgba(74,102,80,0.07);
+  border:1px solid rgba(74,102,80,0.25);
+  border-radius:var(--radius);
+  padding:10px 18px;
+  font-size:14px;
+  color:var(--sage);
+  font-family:var(--body);
+  font-style:italic;
   display:flex;
   align-items:center;
   gap:10px;
 }
 
 .question-card {
-  background:var(--card);
+  background:var(--cream);
   border:1px solid var(--border);
-  border-radius:18px;
-  padding:28px 28px 20px;
+  border-radius:var(--radius);
+  padding:36px 36px 26px;
   position:relative;
-  overflow:hidden;
+  box-shadow: 0 2px 12px var(--shadow2), inset 0 1px 0 rgba(255,255,255,0.5);
 }
+
+/* decorative corner */
 .question-card::before {
   content:'';
   position:absolute;
-  top:-40px;right:-40px;
-  width:120px;height:120px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(245,166,35,0.06),transparent);
+  top:18px;right:20px;
+  width:32px;height:32px;
+  border-top:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  opacity:0.5;
+  pointer-events:none;
+}
+.question-card::after {
+  content:'';
+  position:absolute;
+  bottom:18px;left:20px;
+  width:32px;height:32px;
+  border-bottom:1px solid var(--border2);
+  border-left:1px solid var(--border2);
+  opacity:0.5;
   pointer-events:none;
 }
 
 .q-tag {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--amber);
+  font-family:var(--body);
+  font-style:italic;
+  font-size:12px;
+  color:var(--gold);
   letter-spacing:.1em;
   text-transform:uppercase;
-  margin-bottom:16px;
-  display:inline-block;
-  background:var(--amber-dim);
-  padding:4px 10px;
-  border-radius:6px;
+  margin-bottom:18px;
+  display:block;
 }
 
 .q-text {
   font-family:var(--display);
-  font-size:17px;
-  font-weight:600;
-  line-height:1.55;
-  color:var(--text);
+  font-size:20px;
+  font-weight:500;
+  line-height:1.5;
+  color:var(--ink);
+  letter-spacing:-.01em;
 }
 
 .options-grid{
   display:flex;
   flex-direction:column;
-  gap:9px;
-  margin-top:22px;
+  gap:8px;
+  margin-top:26px;
 }
 .option-btn {
-  background:var(--bg3);
-  border:1.5px solid var(--border);
-  border-radius:10px;
-  padding:13px 16px;
-  font-family:var(--sans);
-  font-size:14px;
-  color:var(--text2);
+  background:var(--cream2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:13px 18px;
+  font-family:var(--body);
+  font-size:15px;
+  color:var(--ink3);
   text-align:left;
   cursor:pointer;
   transition:all .18s;
   display:flex;
   align-items:flex-start;
-  gap:12px;
+  gap:14px;
 }
 .option-btn:hover:not(.answered){
   border-color:var(--border2);
-  color:var(--text);
-  background:var(--card2);
+  color:var(--ink);
+  background:var(--cream3);
 }
 .opt-key {
-  font-family:var(--mono);
-  font-size:10px;
-  background:var(--border);
-  color:var(--muted);
-  border-radius:5px;
-  padding:3px 8px;
+  font-family:var(--display);
+  font-size:11px;
+  font-weight:700;
+  background:var(--cream3);
+  color:var(--brown);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:2px 8px;
   flex-shrink:0;
   margin-top:2px;
   transition:all .2s;
+  letter-spacing:.06em;
 }
 .option-btn.correct{
-  border-color:var(--green);
-  background:var(--green-dim);
-  color:var(--text);
+  border-color:var(--sage);
+  background:rgba(74,102,80,0.08);
+  color:var(--ink);
 }
-.option-btn.correct .opt-key{background:var(--green);color:#000}
+.option-btn.correct .opt-key{background:var(--sage);color:var(--cream);border-color:var(--sage)}
 .option-btn.wrong{
-  border-color:var(--red);
-  background:var(--red-dim);
+  border-color:var(--rust);
+  background:rgba(139,58,42,0.07);
 }
-.option-btn.wrong .opt-key{background:var(--red);color:#fff}
-.option-btn.dim{opacity:.35;pointer-events:none}
+.option-btn.wrong .opt-key{background:var(--rust);color:var(--cream);border-color:var(--rust)}
+.option-btn.dim{opacity:.3;pointer-events:none}
 
 .explanation-box {
-  margin-top:18px;
+  margin-top:20px;
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:var(--radius);
   overflow:hidden;
   animation:fadeSlide .3s ease;
+  background:var(--cream2);
 }
 @keyframes fadeSlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .expl-head {
-  background:var(--bg3);
-  padding:10px 16px;
-  font-size:12px;
+  background:var(--cream3);
+  padding:10px 18px;
+  font-family:var(--display);
+  font-size:13px;
   font-weight:600;
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   gap:8px;
-  color:var(--text2);
+  color:var(--ink);
 }
 .expl-body {
-  padding:14px 16px;
-  font-size:13.5px;
-  color:var(--text2);
-  line-height:1.75;
+  padding:16px 18px;
+  font-family:var(--body);
+  font-size:15px;
+  color:var(--ink3);
+  line-height:1.8;
 }
 .expl-ref {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--amber);
+  font-family:var(--body);
+  font-style:italic;
+  font-size:12px;
+  color:var(--gold);
   margin-top:10px;
-  opacity:.75;
+  opacity:.8;
+  letter-spacing:.03em;
 }
 
 .quiz-footer {
@@ -501,30 +583,32 @@ h1 span {color:var(--amber)}
   gap:12px;
 }
 .score-live {
-  font-family:var(--mono);
-  font-size:13px;
+  font-family:var(--body);
+  font-style:italic;
+  font-size:14px;
   display:flex;
-  gap:18px;
+  gap:20px;
+  color:var(--brown);
 }
-.s-correct{color:var(--green)}
-.s-wrong{color:var(--red)}
+.s-correct{color:var(--sage)}
+.s-wrong{color:var(--rust)}
 
 /* ── RESULTS ── */
 #result-screen {
-  max-width:800px;
+  max-width:780px;
   margin:0 auto;
-  padding:40px 24px;
+  padding:48px 28px;
   display:none;
   flex-direction:column;
   align-items:center;
-  gap:32px;
+  gap:36px;
 }
 #result-screen.active{display:flex}
 
 .result-ring{position:relative;width:160px;height:160px}
 .result-ring svg{transform:rotate(-90deg)}
-.ring-bg{fill:none;stroke:var(--border);stroke-width:8}
-.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.ring-bg{fill:none;stroke:var(--parchment);stroke-width:6}
+.ring-fill{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease}
 .ring-label {
   position:absolute;inset:0;
   display:flex;flex-direction:column;
@@ -532,64 +616,70 @@ h1 span {color:var(--amber)}
 }
 .ring-pct{
   font-family:var(--display);
-  font-size:32px;
+  font-size:34px;
   font-weight:800;
+  color:var(--ink);
+  line-height:1;
 }
-.ring-sub{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.ring-sub{font-size:12px;color:var(--brown);font-family:var(--body);font-style:italic;margin-top:4px}
 
 .result-title{
   font-family:var(--display);
-  font-size:26px;
+  font-size:30px;
   font-weight:800;
   text-align:center;
+  color:var(--ink);
 }
-.result-subtitle{color:var(--text2);text-align:center;max-width:440px;line-height:1.7;font-size:14px}
+.result-subtitle{color:var(--ink3);text-align:center;max-width:440px;line-height:1.8;font-size:15px;font-family:var(--body);font-style:italic}
 
 .table-card {
   width:100%;
-  background:var(--card);
+  background:var(--cream2);
   border:1px solid var(--border);
-  border-radius:16px;
-  padding:20px;
+  border-radius:var(--radius);
+  padding:24px;
   overflow:auto;
 }
 .table-title {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.1em;
+  font-family:var(--display);
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
   margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
 }
 .breakdown-table{width:100%;border-collapse:collapse}
 .breakdown-table th,.breakdown-table td {
   padding:10px 12px;
   text-align:left;
-  font-size:12px;
+  font-size:13px;
   border-bottom:1px solid var(--border);
+  font-family:var(--body);
 }
 .breakdown-table th {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--muted);
+  font-style:italic;
+  font-size:11px;
+  color:var(--brown);
   text-transform:uppercase;
-  letter-spacing:.06em;
+  letter-spacing:.08em;
 }
 .breakdown-table tr:last-child td{border-bottom:none}
 .pct-pill {
-  font-family:var(--mono);
-  font-size:10px;
+  font-family:var(--display);
+  font-size:11px;
+  font-weight:700;
   padding:3px 10px;
   border-radius:100px;
   display:inline-block;
 }
-.pct-green{background:var(--green-dim);color:var(--green)}
-.pct-yellow{background:rgba(245,158,11,0.12);color:var(--yellow)}
-.pct-red{background:var(--red-dim);color:var(--red)}
+.pct-green{background:rgba(74,102,80,0.1);color:var(--sage)}
+.pct-yellow{background:rgba(154,112,64,0.1);color:var(--gold)}
+.pct-red{background:rgba(139,58,42,0.1);color:var(--rust)}
 
 .mini-bar {
-  width:80px;height:4px;
-  background:var(--border);
+  width:80px;height:3px;
+  background:var(--parchment);
   border-radius:2px;
   display:inline-block;
   vertical-align:middle;
@@ -600,97 +690,104 @@ h1 span {color:var(--amber)}
   display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
 }
 
-/* ── NOTES / SUMMARY SCREEN ── */
+/* ── NOTES SCREEN ── */
 #notes-screen {
-  max-width:960px;
+  max-width:940px;
   margin:0 auto;
-  padding:40px 24px;
+  padding:48px 28px;
   display:none;
   flex-direction:column;
-  gap:32px;
+  gap:36px;
 }
 #notes-screen.active{display:flex}
 
 .notes-hero {
   text-align:center;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--border);
 }
 .notes-hero h2 {
   font-family:var(--display);
-  font-size:32px;
+  font-size:36px;
   font-weight:800;
-  color:var(--text);
+  color:var(--ink);
   margin-bottom:8px;
 }
-.notes-hero p{color:var(--text2);font-size:14px;line-height:1.7}
+.notes-hero p{color:var(--ink3);font-size:15px;line-height:1.8;font-family:var(--body);font-style:italic}
 
 .weeks-grid {
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
-  gap:14px;
-}
-
-.week-card {
-  background:var(--card);
+  gap:1px;
+  background:var(--border);
   border:1px solid var(--border);
   border-radius:var(--radius);
   overflow:hidden;
-  transition:border-color .2s;
 }
-.week-card:hover{border-color:var(--border2)}
+
+.week-card {
+  background:var(--cream);
+  transition:background .15s;
+}
 
 .week-header {
-  padding:16px 18px;
+  padding:16px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  background:var(--card2);
   cursor:pointer;
   transition:background .2s;
+  border-bottom:1px solid transparent;
 }
-.week-header:hover{background:var(--bg3)}
+.week-header:hover{background:var(--cream2)}
+.week-card.open .week-header{
+  background:var(--cream2);
+  border-bottom-color:var(--border);
+}
 .week-header-left {
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 .week-badge {
-  font-family:var(--mono);
+  font-family:var(--body);
+  font-style:italic;
   font-size:10px;
-  font-weight:600;
-  background:var(--amber-dim);
-  color:var(--amber);
-  border:1px solid rgba(245,166,35,0.2);
-  padding:4px 10px;
-  border-radius:6px;
-  letter-spacing:.08em;
+  color:var(--gold);
+  border:1px solid rgba(154,112,64,0.3);
+  padding:3px 9px;
+  border-radius:100px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
 }
 .week-name {
   font-family:var(--display);
-  font-size:14px;
-  font-weight:700;
-  color:var(--text);
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  line-height:1.3;
 }
 .week-toggle {
-  font-size:16px;
-  color:var(--muted);
+  font-size:14px;
+  color:var(--brown);
   transition:transform .3s;
 }
 .week-card.open .week-toggle{transform:rotate(180deg)}
 
 .lectures-list {
   display:none;
-  padding:10px;
-  gap:6px;
+  padding:8px;
+  gap:4px;
   flex-direction:column;
+  background:var(--cream2);
 }
 .week-card.open .lectures-list{display:flex}
 
 .lec-btn {
-  background:var(--bg3);
+  background:var(--cream);
   border:1px solid var(--border);
-  border-radius:9px;
-  padding:11px 14px;
+  border-radius:var(--radius);
+  padding:10px 14px;
   cursor:pointer;
   transition:all .2s;
   display:flex;
@@ -698,56 +795,42 @@ h1 span {color:var(--amber)}
   justify-content:space-between;
   gap:8px;
 }
-.lec-btn:hover{
-  border-color:var(--amber);
-  background:var(--amber-dim);
-}
-.lec-btn.has-content{
-  border-color:rgba(0,212,170,0.2);
-}
-.lec-btn.has-content:hover{
-  border-color:var(--teal);
-  background:var(--teal-dim);
-}
-.lec-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+.lec-btn:hover{border-color:var(--border2);background:var(--cream3)}
+.lec-btn.has-content{border-color:rgba(74,102,80,0.25)}
+.lec-btn.has-content:hover{border-color:var(--sage);background:rgba(74,102,80,0.05)}
+.lec-left{display:flex;align-items:center;gap:10px}
 .lec-num {
-  font-family:var(--mono);
+  font-family:var(--body);
+  font-style:italic;
   font-size:10px;
-  color:var(--muted);
-  background:var(--border);
-  padding:3px 8px;
-  border-radius:5px;
-  flex-shrink:0;
+  color:var(--brown);
+  border:1px solid var(--border);
+  padding:2px 7px;
+  border-radius:2px;
+  letter-spacing:.05em;
 }
 .lec-title {
+  font-family:var(--body);
   font-size:13px;
-  font-weight:500;
-  color:var(--text2);
-  text-align:left;
+  color:var(--ink3);
 }
-.lec-btn.has-content .lec-title{color:var(--text)}
-.lec-status {
-  font-size:11px;
-  flex-shrink:0;
-}
+.lec-btn.has-content .lec-title{color:var(--ink);font-weight:500}
+.lec-status {font-size:11px;flex-shrink:0;color:var(--sage)}
 
 /* Notes viewer panel */
 .notes-panel {
-  background:var(--card);
+  background:var(--cream);
   border:1px solid var(--border);
-  border-radius:16px;
+  border-radius:var(--radius);
   overflow:hidden;
   display:none;
+  box-shadow:0 4px 20px var(--shadow);
 }
 .notes-panel.visible{display:block}
 
 .notes-panel-header {
-  padding:16px 20px;
-  background:var(--card2);
+  padding:18px 24px;
+  background:var(--cream2);
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
@@ -755,60 +838,66 @@ h1 span {color:var(--amber)}
 }
 .notes-panel-title {
   font-family:var(--display);
-  font-size:16px;
+  font-size:18px;
   font-weight:700;
+  color:var(--ink);
 }
 .notes-panel-sub {
-  font-family:var(--mono);
-  font-size:10px;
-  color:var(--muted);
+  font-family:var(--body);
+  font-style:italic;
+  font-size:13px;
+  color:var(--brown);
   margin-top:2px;
+  letter-spacing:.03em;
 }
 .notes-close {
-  background:var(--bg3);
+  background:transparent;
   border:1px solid var(--border);
-  border-radius:8px;
-  padding:7px 12px;
-  color:var(--text2);
+  border-radius:var(--radius);
+  padding:6px 14px;
+  color:var(--ink3);
   cursor:pointer;
+  font-family:var(--body);
   font-size:13px;
   transition:all .2s;
 }
-.notes-close:hover{border-color:var(--red);color:var(--red)}
+.notes-close:hover{border-color:var(--rust);color:var(--rust)}
 
 .notes-content {
-  padding:24px;
+  padding:28px;
   min-height:200px;
-  font-size:14px;
-  line-height:1.8;
-  color:var(--text2);
-  white-space:pre-wrap;
-  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.85;
+  color:var(--ink3);
+  font-family:var(--body);
 }
 .notes-empty {
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:48px;
+  padding:52px;
   gap:12px;
-  color:var(--muted);
-  font-family:var(--mono);
-  font-size:13px;
+  color:var(--brown);
+  font-family:var(--body);
+  font-style:italic;
+  font-size:14px;
 }
-.notes-empty-icon{font-size:32px;opacity:.4}
+.notes-empty-icon{font-size:30px;opacity:.35}
 
 /* ── TOAST ── */
 .toast {
   position:fixed;
-  bottom:24px;
+  bottom:28px;
   left:50%;
   transform:translateX(-50%) translateY(10px);
-  background:var(--card2);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:12px 20px;
-  font-size:13px;
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:var(--radius);
+  padding:11px 22px;
+  font-family:var(--body);
+  font-style:italic;
+  font-size:14px;
   z-index:999;
   opacity:0;
   transition:all .3s;
@@ -819,15 +908,16 @@ h1 span {color:var(--amber)}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--parchment);border-radius:3px}
 
 @media(max-width:560px){
-  h1{font-size:28px}
-  .question-card{padding:18px}
-  .btn{padding:11px 20px}
+  h1{font-size:32px}
+  .question-card{padding:22px 18px}
+  .btn{padding:10px 20px}
   .top-nav{padding:12px 16px}
-  .nav-brand span{display:none}
+  .stat-chip{padding:18px 24px;min-width:100px}
+  .stat-chip .num{font-size:26px}
 }
 </style>
 </head>
@@ -837,20 +927,25 @@ h1 span {color:var(--amber)}
   <!-- NAV -->
   <nav class="top-nav">
     <div class="nav-brand">
-      <div class="nav-dot"></div>
-      <span>IIoT & Industry 4.0</span>
+      <div class="nav-ornament"></div>
+      <span>IIoT &amp; Industry 4.0</span>
+      <span class="nav-eyebrow">· NPTEL · Jan–Apr 2025</span>
     </div>
     <div class="nav-links">
-      <button class="nav-link active-tab" onclick="goHome()">🏠 Home</button>
-      <button class="nav-link" id="notes-nav-btn" onclick="goNotes()">📚 Notes</button>
+      <button class="nav-link active-tab" onclick="goHome()">Home</button>
+      <button class="nav-link" id="notes-nav-btn" onclick="goNotes()">Notes</button>
     </div>
   </nav>
 
   <!-- HOME -->
   <div id="home-screen" class="screen active">
-    <div class="hero-eyebrow">NPTEL Exam Prep</div>
-    <h1><span>IIoT Grind</span></h1>
-    <p class="subtitle">180 questions across 12 assignments. Practice, track mistakes, and improve your score.</p>
+    <div class="hero-eyebrow">NPTEL Exam Preparation</div>
+
+    <div class="hero-block">
+      <h1>IIoT &amp; <em>Industry 4.0</em></h1>
+      <div class="hero-sub-line">Complete Examination Preparation Module</div>
+      <p class="subtitle">180 questions across 12 assignments. Practice, track mistakes, and master every topic.</p>
+    </div>
 
     <div class="stats-row">
       <div class="stat-chip"><div class="num">180</div><div class="lbl">Questions</div></div>
@@ -861,12 +956,13 @@ h1 span {color:var(--amber)}
 
     <div class="action-row">
       <button class="btn btn-primary" onclick="startMockTest()">⚡ Full Mock Test</button>
-      <button class="btn btn-teal" id="practice-btn" onclick="startPractice()">🔁 Practice Mistakes</button>
+      <button class="btn btn-teal" id="practice-btn" onclick="startPractice()">↺ Practice Mistakes</button>
       <button class="btn btn-secondary" onclick="goNotes()">📚 View Notes</button>
     </div>
 
     <div style="width:100%">
       <div class="section-header">
+        <div class="section-line"></div>
         <span class="section-label">Practice by Assignment</span>
         <div class="section-line"></div>
       </div>
@@ -894,11 +990,11 @@ h1 span {color:var(--amber)}
     </div>
 
     <div id="practice-banner" class="practice-banner" style="display:none">
-      🔁 <span><strong style="color:var(--teal)">Practice Mode</strong> — reviewing <span id="wrong-count-label">0</span> wrong answers</span>
+      ↺ <span><em>Practice Mode</em> — reviewing <span id="wrong-count-label">0</span> wrong answers</span>
     </div>
 
     <div class="question-card" id="question-card">
-      <div class="q-tag" id="q-tag">A01 · Q1</div>
+      <span class="q-tag" id="q-tag">A01 · Q1</span>
       <div class="q-text" id="q-text"></div>
       <div class="options-grid" id="options-grid"></div>
       <div id="explanation-area"></div>
@@ -922,8 +1018,8 @@ h1 span {color:var(--amber)}
           stroke="url(#rg)" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
         <defs>
           <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f5a623"/>
-            <stop offset="100%" stop-color="#00d4aa"/>
+            <stop offset="0%" stop-color="#9a7040"/>
+            <stop offset="100%" stop-color="#4a6650"/>
           </linearGradient>
         </defs>
       </svg>
@@ -933,7 +1029,7 @@ h1 span {color:var(--amber)}
       </div>
     </div>
 
-    <div>
+    <div style="text-align:center">
       <div class="result-title" id="result-title">Test Complete!</div>
       <p class="result-subtitle" id="result-subtitle"></p>
     </div>
@@ -952,16 +1048,15 @@ h1 span {color:var(--amber)}
   <!-- NOTES -->
   <div id="notes-screen" class="screen">
     <div class="notes-hero">
-      <h2>📚 Lecture Notes</h2>
-      <p>Select a week, then pick a lecture to read your summary notes.<br/>Click any lecture button to add or view its content.</p>
+      <h2>Lecture Notes</h2>
+      <p>Select a week, then pick a lecture to read your summary notes.</p>
     </div>
 
-    <!-- Notes viewer panel -->
     <div class="notes-panel" id="notes-panel">
       <div class="notes-panel-header">
         <div>
           <div class="notes-panel-title" id="notes-panel-title">Week 1 — Lecture 1</div>
-          <div class="notes-panel-sub" id="notes-panel-sub">IoT Basics & Connectivity</div>
+          <div class="notes-panel-sub" id="notes-panel-sub">IoT Basics &amp; Connectivity</div>
         </div>
         <button class="notes-close" onclick="closeNotesPanel()">✕ Close</button>
       </div>
@@ -969,7 +1064,6 @@ h1 span {color:var(--amber)}
         <div class="notes-empty">
           <div class="notes-empty-icon">📝</div>
           <span>No notes added yet for this lecture.</span>
-          <span style="font-size:11px;margin-top:4px">Edit the HTML file to add your summary.</span>
         </div>
       </div>
     </div>
@@ -981,27 +1075,10 @@ h1 span {color:var(--amber)}
 
 <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════════════
-     NOTES DATA — ADD YOUR SUMMARIES HERE
-     Find the NOTES_DATA object below.
-     Each key is "W{week}_L{lecture}", e.g. "W1_L1" for Week 1 Lecture 1.
-     Replace the empty string "" with your summary text.
-     You can use plain text with line breaks.
-═══════════════════════════════════════════════════════ -->
 <script>
-// ═══════════════════════════════════════════════════════════════════
-//  📝 NOTES DATA — ADD YOUR LECTURE SUMMARIES HERE
-//
-//  Format: "W{week}_L{lecture}": `your notes here`
-//
-//  Example:
-//  "W1_L1": `Zero-order systems: output follows input instantly.
-//  Potentiometer is the classic example.
-//  Sensors classified as: zero, first, second order systems.`
-// ═══════════════════════════════════════════════════════════════════
 const NOTES_DATA = {
-  "W1_L1": "",   // Week 1, Lecture 1
-  "W1_L2": "",   // Week 1, Lecture 2
+  "W1_L1": "",
+  "W1_L2": "",
   "W1_L3":`I. IoT Networking Challenges
 - Constraints: Low processing power, small physical size, and energy/battery limitations.
 - Networks: Often "lossy" with high packet loss and frequent topology changes.
@@ -1013,7 +1090,7 @@ II. The "IoT Tree" Analogy (ARM)
 - Leaves (Applications): Final use cases like Smart Healthcare and Smart Cities.
 
 III. Connection Solutions
-- Proprietary: "Private language" solutions. Causes "Vendor Lock-in" where you are stuck with one company's hardware/software.
+- Proprietary: "Private language" solutions. Causes "Vendor Lock-in."
 - IETF IP-Standard: The "Open" way.
     * 6LoWPAN: Shrinks IPv6 headers to fit in low-power packets.
     * ROLL: Optimized routing for energy and storage.
@@ -1022,93 +1099,28 @@ III. Connection Solutions
 IV. Quality of Service (QoS)
 - Timeliness: Ensures data isn't stale (Deadline Policy).
 - Availability: Data remains accessible even if a sensor is offline.
-- Delivery: Guarantees the message actually reached the destination.`,   // Week 1, Lecture 3
-  "W1_L4": "",   // Week 1, Lecture 4
-  "W1_L5": "",   // Week 1, Lecture 5
-
-  "W2_L1": "",
-  "W2_L2": "",
-  "W2_L3": "",
-  "W2_L4": "",
-  "W2_L5": "",
-
-  "W3_L1": "",
-  "W3_L2": "",
-  "W3_L3": "",
-  "W3_L4": "",
-  "W3_L5": "",
-
-  "W4_L1": "",
-  "W4_L2": "",
-  "W4_L3": "",
-  "W4_L4": "",
-  "W4_L5": "",
-
-  "W5_L1": "",
-  "W5_L2": "",
-  "W5_L3": "",
-  "W5_L4": "",
-  "W5_L5": "",
-
-  "W6_L1": "",
-  "W6_L2": "",
-  "W6_L3": "",
-  "W6_L4": "",
-  "W6_L5": "",
-
-  "W7_L1": "",
-  "W7_L2": "",
-  "W7_L3": "",
-  "W7_L4": "",
-  "W7_L5": "",
-
-  "W8_L1": "",
-  "W8_L2": "",
-  "W8_L3": "",
-  "W8_L4": "",
-  "W8_L5": "",
-
-  "W9_L1": "",
-  "W9_L2": "",
-  "W9_L3": "",
-  "W9_L4": "",
-  "W9_L5": "",
-
-  "W10_L1": "",
-  "W10_L2": "",
-  "W10_L3": "",
-  "W10_L4": "",
-  "W10_L5": "",
-
-  "W11_L1": "",
-  "W11_L2": "",
-  "W11_L3": "",
-  "W11_L4": "",
-  "W11_L5": "",
-
-  "W12_L1": "",
-  "W12_L2": "",
-  "W12_L3": "",
-  "W12_L4": "",
-  "W12_L5": "",
+- Delivery: Guarantees the message actually reached the destination.`,
+  "W1_L4": "", "W1_L5": "",
+  "W2_L1":"","W2_L2":"","W2_L3":"","W2_L4":"","W2_L5":"",
+  "W3_L1":"","W3_L2":"","W3_L3":"","W3_L4":"","W3_L5":"",
+  "W4_L1":"","W4_L2":"","W4_L3":"","W4_L4":"","W4_L5":"",
+  "W5_L1":"","W5_L2":"","W5_L3":"","W5_L4":"","W5_L5":"",
+  "W6_L1":"","W6_L2":"","W6_L3":"","W6_L4":"","W6_L5":"",
+  "W7_L1":"","W7_L2":"","W7_L3":"","W7_L4":"","W7_L5":"",
+  "W8_L1":"","W8_L2":"","W8_L3":"","W8_L4":"","W8_L5":"",
+  "W9_L1":"","W9_L2":"","W9_L3":"","W9_L4":"","W9_L5":"",
+  "W10_L1":"","W10_L2":"","W10_L3":"","W10_L4":"","W10_L5":"",
+  "W11_L1":"","W11_L2":"","W11_L3":"","W11_L4":"","W11_L5":"",
+  "W12_L1":"","W12_L2":"","W12_L3":"","W12_L4":"","W12_L5":"",
 };
 
 const WEEK_TITLES = [
-  "IoT Basics & Connectivity",
-  "Lean, Industry 4.0 & Smart Factories",
-  "AR/VR, CPS, AI & Big Data",
-  "Cybersecurity & Smart Sensors",
-  "Business Models & IIRA",
-  "Industrial Protocols & 5G",
-  "LPWAN, Edge & Industrial Control",
-  "ML, Analytics & Cloud",
-  "Fog Computing, R & SDN",
-  "6TiSCH, Security & Smart Factories",
-  "Healthcare, Energy & Inventory",
-  "Industry Applications & UAVs",
+  "IoT Basics & Connectivity","Lean, Industry 4.0 & Smart Factories","AR/VR, CPS, AI & Big Data",
+  "Cybersecurity & Smart Sensors","Business Models & IIRA","Industrial Protocols & 5G",
+  "LPWAN, Edge & Industrial Control","ML, Analytics & Cloud","Fog Computing, R & SDN",
+  "6TiSCH, Security & Smart Factories","Healthcare, Energy & Inventory","Industry Applications & UAVs",
 ];
 
-// ─── QUIZ DATA ───────────────────────────────────────────────────────
 const ASSIGNMENTS = [
   { title: "IoT Basics & Connectivity", questions: [
     { q:"Which of the following sensors is an example of a Zero Order System?", opts:["Thermometer","Potentiometer","Accelerometer","Gyroscope"], ans:1, expl:"A zero-order system produces output instantly without energy storage or dynamic lag. A potentiometer is the classic example.", ref:"Slide 12, Week 1 Lecture 1" },
@@ -1321,22 +1333,14 @@ const FLAT = [];
 ASSIGNMENTS.forEach((a, ai) => a.questions.forEach((q) => FLAT.push({...q, asgnIdx: ai})));
 
 let state = {
-  mode: null,
-  questions: [],
-  current: 0,
-  correct: 0,
-  wrong: 0,
-  wrongIndices: [],
-  answered: false,
-  assignmentIdx: null,
-  sessionPerAssignment: {},
-  perAssignment: {},
-  bestScore: null,
+  mode: null, questions: [], current: 0, correct: 0, wrong: 0,
+  wrongIndices: [], answered: false, assignmentIdx: null,
+  sessionPerAssignment: {}, perAssignment: {}, bestScore: null,
 };
 
 function loadStorage() {
   try {
-    const s = JSON.parse(localStorage.getItem('iiot_v2') || '{}');
+    const s = JSON.parse(localStorage.getItem('iiot_serif_v1') || '{}');
     if (s.wrongIndices) state.wrongIndices = s.wrongIndices;
     if (s.bestScore !== undefined) state.bestScore = s.bestScore;
     if (s.perAssignment) state.perAssignment = s.perAssignment;
@@ -1345,45 +1349,29 @@ function loadStorage() {
 
 function saveStorage() {
   try {
-    localStorage.setItem('iiot_v2', JSON.stringify({
-      wrongIndices: state.wrongIndices,
-      bestScore: state.bestScore,
-      perAssignment: state.perAssignment
+    localStorage.setItem('iiot_serif_v1', JSON.stringify({
+      wrongIndices: state.wrongIndices, bestScore: state.bestScore, perAssignment: state.perAssignment
     }));
   } catch(e){}
 }
 
 function shuffle(arr) {
   const a = [...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
-  }
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
 
-// ─── NAV ─────────────────────────────────────────────────────────────
-function goHome() {
-  setScreen('home-screen');
-  setActiveNav('home');
-  renderHome();
-}
-function goNotes() {
-  setScreen('notes-screen');
-  setActiveNav('notes');
-  renderNotesScreen();
-}
+function goHome() { setScreen('home-screen'); setActiveNav('home'); renderHome(); }
+function goNotes() { setScreen('notes-screen'); setActiveNav('notes'); renderNotesScreen(); }
 function setActiveNav(tab) {
   document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active-tab'));
   if(tab === 'home') document.querySelectorAll('.nav-link')[0].classList.add('active-tab');
   if(tab === 'notes') document.getElementById('notes-nav-btn').classList.add('active-tab');
 }
 
-// ─── HOME ─────────────────────────────────────────────────────────────
 function renderHome() {
   document.getElementById('best-score-display').textContent = state.bestScore !== null ? state.bestScore+'%' : '—';
   document.getElementById('wrong-bank-display').textContent = state.wrongIndices.length;
-
   const grid = document.getElementById('assignment-grid');
   grid.innerHTML = '';
   ASSIGNMENTS.forEach((a, i) => {
@@ -1393,7 +1381,7 @@ function renderHome() {
     div.className = 'asgn-card';
     div.onclick = () => startAssignment(i);
     div.innerHTML = `
-      <div class="asgn-num">ASSIGNMENT ${String(i+1).padStart(2,'0')}</div>
+      <div class="asgn-num">Assignment ${String(i+1).padStart(2,'0')}</div>
       <div class="asgn-title">${a.title}</div>
       <div class="asgn-score">${data.total>0?`${data.correct}/${data.total} · ${pct}%`:'15 questions'}</div>
       <div class="asgn-bar"><div class="asgn-bar-fill" style="width:${pct}%"></div></div>
@@ -1402,44 +1390,34 @@ function renderHome() {
   });
 }
 
-// ─── QUIZ ─────────────────────────────────────────────────────────────
 function startMockTest() {
-  state.mode = 'mock';
-  state.questions = shuffle(FLAT);
-  state.current = 0; state.correct = 0; state.wrong = 0;
-  state.answered = false; state.sessionPerAssignment = {};
+  state.mode = 'mock'; state.questions = shuffle(FLAT);
+  state.current = 0; state.correct = 0; state.wrong = 0; state.answered = false; state.sessionPerAssignment = {};
   document.getElementById('quiz-mode-label').textContent = 'Mock Test';
   document.getElementById('quiz-sub-label').textContent = '180 questions · shuffled';
   document.getElementById('practice-banner').style.display = 'none';
-  setScreen('quiz-screen');
-  renderQuestion();
+  setScreen('quiz-screen'); renderQuestion();
 }
 
 function startAssignment(idx) {
-  state.mode = 'assignment';
-  state.assignmentIdx = idx;
+  state.mode = 'assignment'; state.assignmentIdx = idx;
   state.questions = [...ASSIGNMENTS[idx].questions];
-  state.current = 0; state.correct = 0; state.wrong = 0;
-  state.answered = false; state.sessionPerAssignment = {};
+  state.current = 0; state.correct = 0; state.wrong = 0; state.answered = false; state.sessionPerAssignment = {};
   document.getElementById('quiz-mode-label').textContent = `Assignment ${idx+1}`;
   document.getElementById('quiz-sub-label').textContent = ASSIGNMENTS[idx].title;
   document.getElementById('practice-banner').style.display = 'none';
-  setScreen('quiz-screen');
-  renderQuestion();
+  setScreen('quiz-screen'); renderQuestion();
 }
 
 function startPractice() {
-  if(state.wrongIndices.length === 0){ showToast('No wrong answers yet! Take a quiz first.'); return; }
-  state.mode = 'practice';
-  state.questions = shuffle(state.wrongIndices).map(i => FLAT[i]);
-  state.current = 0; state.correct = 0; state.wrong = 0;
-  state.answered = false; state.sessionPerAssignment = {};
+  if(state.wrongIndices.length === 0){ showToast('No wrong answers yet — take a quiz first.'); return; }
+  state.mode = 'practice'; state.questions = shuffle(state.wrongIndices).map(i => FLAT[i]);
+  state.current = 0; state.correct = 0; state.wrong = 0; state.answered = false; state.sessionPerAssignment = {};
   document.getElementById('quiz-mode-label').textContent = 'Practice Mode';
   document.getElementById('quiz-sub-label').textContent = 'Reviewing your wrong answers';
   document.getElementById('practice-banner').style.display = 'flex';
   document.getElementById('wrong-count-label').textContent = state.wrongIndices.length;
-  setScreen('quiz-screen');
-  renderQuestion();
+  setScreen('quiz-screen'); renderQuestion();
 }
 
 function renderQuestion() {
@@ -1452,12 +1430,10 @@ function renderQuestion() {
   document.getElementById('live-correct').textContent = state.correct;
   document.getElementById('live-wrong').textContent = state.wrong;
   document.getElementById('next-btn').style.display = 'none';
-
   const ai = q.asgnIdx !== undefined ? q.asgnIdx : state.assignmentIdx;
-  document.getElementById('q-tag').textContent = `A${String((ai||0)+1).padStart(2,'0')} · Q${state.current+1}`;
+  document.getElementById('q-tag').textContent = `Assignment ${String((ai||0)+1).padStart(2,'0')} · Question ${state.current+1}`;
   document.getElementById('q-text').textContent = q.q;
   document.getElementById('explanation-area').innerHTML = '';
-
   const labels = ['A','B','C','D'];
   const grid = document.getElementById('options-grid');
   grid.innerHTML = '';
@@ -1477,34 +1453,25 @@ function answer(idx) {
   const q = state.questions[state.current];
   const btns = document.querySelectorAll('.option-btn');
   const correct = idx === q.ans;
-
   btns.forEach((btn, i) => {
     btn.classList.add('answered');
     if(i === q.ans) btn.classList.add('correct');
     else if(i === idx && !correct) btn.classList.add('wrong');
     else btn.classList.add('dim');
   });
-
   const flatIdx = FLAT.findIndex(f => f.q === q.q);
-  if(correct) {
-    state.correct++;
-    state.wrongIndices = state.wrongIndices.filter(i => i !== flatIdx);
-  } else {
-    state.wrong++;
-    if(flatIdx !== -1 && !state.wrongIndices.includes(flatIdx)) state.wrongIndices.push(flatIdx);
-  }
-
+  if(correct) { state.correct++; state.wrongIndices = state.wrongIndices.filter(i => i !== flatIdx); }
+  else { state.wrong++; if(flatIdx !== -1 && !state.wrongIndices.includes(flatIdx)) state.wrongIndices.push(flatIdx); }
   const ai = q.asgnIdx !== undefined ? q.asgnIdx : state.assignmentIdx;
   if(ai !== undefined && ai !== null) {
     if(!state.sessionPerAssignment[ai]) state.sessionPerAssignment[ai] = {correct:0, total:0};
     state.sessionPerAssignment[ai].total++;
     if(correct) state.sessionPerAssignment[ai].correct++;
   }
-
   document.getElementById('explanation-area').innerHTML = `
     <div class="explanation-box">
       <div class="expl-head">
-        <span>${correct ? '✓ Correct!' : `✗ Wrong — Answer: ${['A','B','C','D'][q.ans]}) ${q.opts[q.ans]}`}</span>
+        <span>${correct ? '✓ Correct' : `✗ Wrong — Answer: ${['A','B','C','D'][q.ans]}) ${q.opts[q.ans]}`}</span>
       </div>
       <div class="expl-body">
         ${q.expl}
@@ -1512,7 +1479,6 @@ function answer(idx) {
       </div>
     </div>
   `;
-
   document.getElementById('live-correct').textContent = state.correct;
   document.getElementById('live-wrong').textContent = state.wrong;
   const nb = document.getElementById('next-btn');
@@ -1527,87 +1493,52 @@ function nextQuestion() {
 }
 
 function quitQuiz() {
-  if(confirm('Quit the quiz? Your progress will be saved.')) {
-    saveStorage();
-    goHome();
-  }
+  if(confirm('Quit the quiz? Your progress will be saved.')) { saveStorage(); goHome(); }
 }
 
 function finishQuiz() {
-  Object.entries(state.sessionPerAssignment).forEach(([ai, data]) => {
-    state.perAssignment[ai] = data;
-  });
+  Object.entries(state.sessionPerAssignment).forEach(([ai, data]) => { state.perAssignment[ai] = data; });
   const total = state.questions.length;
   const pct = Math.round(state.correct/total*100);
-  if(state.mode === 'mock') {
-    if(state.bestScore === null || pct > state.bestScore) state.bestScore = pct;
-  }
+  if(state.mode === 'mock') { if(state.bestScore === null || pct > state.bestScore) state.bestScore = pct; }
   saveStorage();
   setScreen('result-screen');
-
   const circ = 2*Math.PI*70;
   const offset = circ - (pct/100)*circ;
   const ring = document.getElementById('ring-fill');
-  ring.style.strokeDasharray = circ;
-  ring.style.strokeDashoffset = circ;
+  ring.style.strokeDasharray = circ; ring.style.strokeDashoffset = circ;
   setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
   document.getElementById('ring-pct').textContent = pct + '%';
-
-  const title = pct>=80?'🎉 Excellent!':pct>=60?'👍 Good Job!':'💪 Keep Going!';
+  const title = pct>=80?'Excellent Work':pct>=60?'Good Progress':'Keep Studying';
   document.getElementById('result-title').textContent = title;
-  document.getElementById('result-subtitle').textContent = `${state.correct} of ${total} correct. ${state.wrongIndices.length} question(s) in your practice bank.`;
-
+  document.getElementById('result-subtitle').textContent = `${state.correct} of ${total} correct. ${state.wrongIndices.length} question(s) added to your practice bank.`;
   const tbody = document.getElementById('breakdown-body');
   tbody.innerHTML = '';
   if(state.mode === 'assignment') {
     const ai = state.assignmentIdx;
     const p = Math.round(state.correct/total*100);
     const cls = p>=80?'pct-green':p>=50?'pct-yellow':'pct-red';
-    const fill = p>=80?'#22c55e':p>=50?'#f59e0b':'#ef4444';
-    tbody.innerHTML = `<tr>
-      <td>${ASSIGNMENTS[ai].title}</td>
-      <td style="font-family:var(--mono)">${state.correct}/${total}</td>
-      <td><span class="pct-pill ${cls}">${p}%</span></td>
-      <td><span class="mini-bar"><span class="mini-fill" style="width:${p}%;background:${fill}"></span></span></td>
-    </tr>`;
+    const fill = p>=80?'#4a6650':p>=50?'#9a7040':'#8b3a2a';
+    tbody.innerHTML = `<tr><td>${ASSIGNMENTS[ai].title}</td><td style="font-style:italic">${state.correct}/${total}</td><td><span class="pct-pill ${cls}">${p}%</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:${p}%;background:${fill}"></span></span></td></tr>`;
   } else {
     ASSIGNMENTS.forEach((a,i) => {
-      const d = state.sessionPerAssignment[i];
-      if(!d) return;
+      const d = state.sessionPerAssignment[i]; if(!d) return;
       const p = Math.round(d.correct/d.total*100);
       const cls = p>=80?'pct-green':p>=50?'pct-yellow':'pct-red';
-      const fill = p>=80?'#22c55e':p>=50?'#f59e0b':'#ef4444';
-      tbody.innerHTML += `<tr>
-        <td><span style="font-family:var(--mono);font-size:10px;color:var(--muted)">A${String(i+1).padStart(2,'0')}</span> ${a.title}</td>
-        <td style="font-family:var(--mono);font-size:12px">${d.correct}/${d.total}</td>
-        <td><span class="pct-pill ${cls}">${p}%</span></td>
-        <td><span class="mini-bar"><span class="mini-fill" style="width:${p}%;background:${fill}"></span></span></td>
-      </tr>`;
+      const fill = p>=80?'#4a6650':p>=50?'#9a7040':'#8b3a2a';
+      tbody.innerHTML += `<tr><td><span style="font-style:italic;font-size:11px;color:var(--brown)">A${String(i+1).padStart(2,'0')}</span> ${a.title}</td><td style="font-style:italic;font-size:13px">${d.correct}/${d.total}</td><td><span class="pct-pill ${cls}">${p}%</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:${p}%;background:${fill}"></span></span></td></tr>`;
     });
   }
-
   const acts = document.getElementById('result-actions');
   acts.innerHTML = '';
   if(state.wrongIndices.length > 0) {
-    const pb = document.createElement('button');
-    pb.className = 'btn btn-primary';
-    pb.textContent = `🔁 Practice ${state.wrongIndices.length} Mistakes`;
-    pb.onclick = startPractice;
+    const pb = document.createElement('button'); pb.className = 'btn btn-primary';
+    pb.textContent = `↺ Practice ${state.wrongIndices.length} Mistakes`; pb.onclick = startPractice;
     acts.appendChild(pb);
   }
-  const hb = document.createElement('button');
-  hb.className = 'btn btn-secondary';
-  hb.textContent = '← Home';
-  hb.onclick = goHome;
-  acts.appendChild(hb);
-  const rb = document.createElement('button');
-  rb.className = 'btn btn-secondary';
-  rb.textContent = '↺ Retry';
-  rb.onclick = () => {
-    if(state.mode==='mock') startMockTest();
-    else if(state.mode==='assignment') startAssignment(state.assignmentIdx);
-    else startPractice();
-  };
+  const hb = document.createElement('button'); hb.className = 'btn btn-secondary'; hb.textContent = '← Home'; hb.onclick = goHome; acts.appendChild(hb);
+  const rb = document.createElement('button'); rb.className = 'btn btn-secondary'; rb.textContent = '↺ Retry';
+  rb.onclick = () => { if(state.mode==='mock') startMockTest(); else if(state.mode==='assignment') startAssignment(state.assignmentIdx); else startPractice(); };
   acts.appendChild(rb);
 }
 
@@ -1617,80 +1548,41 @@ let currentNoteKey = null;
 function renderNotesScreen() {
   const grid = document.getElementById('weeks-grid');
   grid.innerHTML = '';
-
   for(let w=1; w<=12; w++) {
     const card = document.createElement('div');
-    card.className = 'week-card';
-    card.id = `week-card-${w}`;
-
+    card.className = 'week-card'; card.id = `week-card-${w}`;
     const header = document.createElement('div');
-    header.className = 'week-header';
-    header.onclick = () => toggleWeek(w);
-    header.innerHTML = `
-      <div class="week-header-left">
-        <span class="week-badge">WEEK ${String(w).padStart(2,'0')}</span>
-        <span class="week-name">${WEEK_TITLES[w-1]}</span>
-      </div>
-      <span class="week-toggle">▾</span>
-    `;
-
+    header.className = 'week-header'; header.onclick = () => toggleWeek(w);
+    header.innerHTML = `<div class="week-header-left"><span class="week-badge">Week ${String(w).padStart(2,'0')}</span><span class="week-name">${WEEK_TITLES[w-1]}</span></div><span class="week-toggle">▾</span>`;
     const lecList = document.createElement('div');
     lecList.className = 'lectures-list';
-
     for(let l=1; l<=5; l++) {
       const key = `W${w}_L${l}`;
       const hasContent = NOTES_DATA[key] && NOTES_DATA[key].trim() !== '';
-
       const btn = document.createElement('button');
       btn.className = 'lec-btn' + (hasContent ? ' has-content' : '');
       btn.onclick = () => openNote(w, l, key);
-      btn.innerHTML = `
-        <div class="lec-left">
-          <span class="lec-num">LEC ${l}</span>
-          <span class="lec-title">Lecture ${l}</span>
-        </div>
-        <span class="lec-status">${hasContent ? '📄' : '○'}</span>
-      `;
+      btn.innerHTML = `<div class="lec-left"><span class="lec-num">Lec ${l}</span><span class="lec-title">Lecture ${l}</span></div><span class="lec-status">${hasContent ? '📄' : '○'}</span>`;
       lecList.appendChild(btn);
     }
-
-    card.appendChild(header);
-    card.appendChild(lecList);
-    grid.appendChild(card);
+    card.appendChild(header); card.appendChild(lecList); grid.appendChild(card);
   }
 }
 
-function toggleWeek(w) {
-  const card = document.getElementById(`week-card-${w}`);
-  card.classList.toggle('open');
-}
+function toggleWeek(w) { document.getElementById(`week-card-${w}`).classList.toggle('open'); }
 
 function openNote(week, lec, key) {
   currentNoteKey = key;
   const panel = document.getElementById('notes-panel');
-  const title = document.getElementById('notes-panel-title');
-  const sub = document.getElementById('notes-panel-sub');
+  document.getElementById('notes-panel-title').textContent = `Week ${week} — Lecture ${lec}`;
+  document.getElementById('notes-panel-sub').textContent = WEEK_TITLES[week-1];
   const content = document.getElementById('notes-content-area');
-
-  title.textContent = `Week ${week} — Lecture ${lec}`;
-  sub.textContent = WEEK_TITLES[week-1];
-
   const notes = NOTES_DATA[key];
   if(notes && notes.trim() !== '') {
-    content.innerHTML = `<div style="white-space:pre-wrap;line-height:1.85;color:var(--text2);font-size:14px">${escapeHtml(notes)}</div>`;
+    content.innerHTML = `<div style="white-space:pre-wrap;line-height:1.85;color:var(--ink3);font-size:15px;font-family:var(--body)">${escapeHtml(notes)}</div>`;
   } else {
-    content.innerHTML = `
-      <div class="notes-empty">
-        <div class="notes-empty-icon">📝</div>
-        <span>No notes yet for Week ${week}, Lecture ${lec}</span>
-        <span style="font-size:11px;margin-top:6px;text-align:center;max-width:300px">
-          Open the HTML file and find <strong style="color:var(--amber)">NOTES_DATA</strong>.<br/>
-          Set the value for <strong style="color:var(--amber)">"${key}"</strong> to add your summary.
-        </span>
-      </div>
-    `;
+    content.innerHTML = `<div class="notes-empty"><div class="notes-empty-icon">📝</div><span>No notes yet for Week ${week}, Lecture ${lec}.</span><span style="font-size:12px;margin-top:6px;text-align:center;max-width:300px">Edit the <strong>NOTES_DATA</strong> object in the HTML file and set the value for <strong>"${key}"</strong>.</span></div>`;
   }
-
   panel.classList.add('visible');
   panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -1704,7 +1596,6 @@ function escapeHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// ─── UTILS ───────────────────────────────────────────────────────────
 function setScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1712,12 +1603,10 @@ function setScreen(id) {
 
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────
 loadStorage();
 renderHome();
 </script>
