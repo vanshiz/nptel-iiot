@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -31,6 +31,123 @@
   --radius: 4px;
 }
 
+/* ── DARK MODE ── */
+[data-theme="dark"] {
+  --cream: #1a1410;
+  --cream2: #221c15;
+  --cream3: #2c241a;
+  --parchment: #3d3228;
+  --ink: #f0e8d8;
+  --ink2: #e0d8c8;
+  --ink3: #c0a880;
+  --brown: #a08060;
+  --brown-light: #c0a070;
+  --gold: #c8a060;
+  --gold-light: #d8b870;
+  --rust: #c86858;
+  --sage: #70a880;
+  --border: #383024;
+  --border2: #504030;
+  --shadow: rgba(0,0,0,0.5);
+  --shadow2: rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] body {
+  background: #1a1410;
+}
+
+[data-theme="dark"] body::before {
+  background-image:
+    linear-gradient(rgba(240,232,216,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,232,216,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+[data-theme="dark"] .top-nav {
+  background: rgba(26,20,16,0.96);
+}
+
+[data-theme="dark"] .option-btn {
+  background: var(--cream2);
+}
+
+[data-theme="dark"] .option-btn:hover:not(.answered) {
+  background: var(--cream3);
+  border-color: var(--border2);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .btn-primary {
+  background: var(--ink);
+  color: #1a1410;
+  border-color: var(--ink);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: var(--ink2);
+}
+
+[data-theme="dark"] .question-card {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+[data-theme="dark"] .asgn-card:hover { background: var(--cream3); }
+
+[data-theme="dark"] .toast {
+  background: var(--cream2);
+  color: var(--ink);
+  border: 1px solid var(--border2);
+}
+
+[data-theme="dark"] .notes-close:hover {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+
+[data-theme="dark"] .week-header:hover { background: var(--cream3); }
+[data-theme="dark"] .week-card.open .week-header { background: var(--cream3); }
+
+[data-theme="dark"] .lec-btn { background: var(--cream2); }
+[data-theme="dark"] .lec-btn:hover { background: var(--cream3); }
+
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .nav-link.active-tab {
+  background: rgba(200,160,96,0.1);
+}
+
+[data-theme="dark"] .breakdown-table th { color: var(--brown); }
+[data-theme="dark"] .breakdown-table td { color: var(--ink3); }
+
+[data-theme="dark"] .explanation-box { background: var(--cream2); }
+[data-theme="dark"] .expl-head { background: var(--cream3); }
+
+[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--cream2); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--parchment); }
+
+/* Theme toggle */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink3);
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.04em;
+}
+.theme-toggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(154,112,64,0.07);
+}
+.theme-icon { font-size: 13px; line-height: 1; }
+
 *{box-sizing:border-box;margin:0;padding:0}
 
 body {
@@ -41,6 +158,7 @@ body {
   overflow-x: hidden;
   font-size: 17px;
   line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* Subtle grid texture */
@@ -74,6 +192,7 @@ body::before {
   position:sticky;
   top:0;
   z-index:100;
+  transition: background 0.3s, border-color 0.3s;
 }
 .nav-brand {
   display:flex;
@@ -105,6 +224,12 @@ body::before {
   color: var(--gold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-links{display:flex;gap:4px}
@@ -440,6 +565,7 @@ h1 em {
   padding:36px 36px 26px;
   position:relative;
   box-shadow: 0 2px 12px var(--shadow2), inset 0 1px 0 rgba(255,255,255,0.5);
+  transition: background 0.3s, border-color 0.3s;
 }
 
 /* decorative corner */
@@ -918,6 +1044,7 @@ h1 em {
   .top-nav{padding:12px 16px}
   .stat-chip{padding:18px 24px;min-width:100px}
   .stat-chip .num{font-size:26px}
+  .nav-eyebrow{display:none}
 }
 </style>
 </head>
@@ -931,9 +1058,15 @@ h1 em {
       <span>IIoT &amp; Industry 4.0</span>
       <span class="nav-eyebrow">· NPTEL · Jan–Apr 2025</span>
     </div>
-    <div class="nav-links">
-      <button class="nav-link active-tab" onclick="goHome()">Home</button>
-      <button class="nav-link" id="notes-nav-btn" onclick="goNotes()">Notes</button>
+    <div class="nav-right">
+      <div class="nav-links">
+        <button class="nav-link active-tab" onclick="goHome()">Home</button>
+        <button class="nav-link" id="notes-nav-btn" onclick="goNotes()">Notes</button>
+      </div>
+      <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()">
+        <span class="theme-icon" id="theme-icon">☾</span>
+        <span id="theme-label">Dark</span>
+      </button>
     </div>
   </nav>
 
@@ -1083,6 +1216,28 @@ h1 em {
 <div class="toast" id="toast"></div>
 
 <script>
+// ── THEME ──────────────────────────────────────────────────────────────
+function getStoredTheme(){try{return localStorage.getItem('iiot_theme')||'light';}catch(e){return 'light';}}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  var icon = document.getElementById('theme-icon');
+  var label = document.getElementById('theme-label');
+  if(t === 'dark'){
+    if(icon) icon.textContent = '○';
+    if(label) label.textContent = 'Light';
+  } else {
+    if(icon) icon.textContent = '☾';
+    if(label) label.textContent = 'Dark';
+  }
+  try{ localStorage.setItem('iiot_theme', t); }catch(e){}
+}
+function toggleTheme(){
+  var current = document.documentElement.getAttribute('data-theme') || 'light';
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+applyTheme(getStoredTheme());
+
+// ── DATA ───────────────────────────────────────────────────────────────
 const NOTES_DATA = {
   "W1_L1": `
   
